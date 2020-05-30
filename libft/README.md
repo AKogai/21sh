@@ -1,0 +1,2 @@
+# libft
+library on Clang
