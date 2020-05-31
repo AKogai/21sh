@@ -37,7 +37,6 @@ int		ft_builtin_unsetenv(char **cmd);
 int		ft_builtin_cd(char **cmd);
 void	ft_builtin_exit(char **cmd);
 int		ft_builtin_history(char **cmd);
-
 /*
 ** ENV
 */
