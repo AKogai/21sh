@@ -12,7 +12,9 @@ add_library(my_lib STATIC IMPORTED)
 set_target_properties(my_lib PROPERTIES
         IMPORTED_LOCATION "${CMAKE_SOURCE_DIR}/libft/libft.a")
 
-file(GLOB SRC "includes/*.h" "src/*.c" "srcs/builtin/*.c" "srcs/read/*.c"
+file(GLOB SRC "includes/*.h" "srcs/main.c" "srcs/exit_shell.c"
+        "srcs/init.c" "srcs/signals.c" ""
+        "srcs/builtin/*.c" "srcs/read/*.c"
         "srcs/exec/*.c" "srcs/lexer/*.c" "srcs/parser/*.c" "libft/libft.h")
 
 add_executable(21sh ${SRC})

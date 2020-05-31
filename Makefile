@@ -52,7 +52,7 @@ SRCS = 	$(addprefix $(SRCS_PATH)/, main.c \
 		builtin/unsetenv.c \
 		builtin/exit.c )
 OBJS =  $(SRCS:$(SRCS_PATH)/%.c=$(OBJS_PATH)/%.o)
-INCLUDES = includes libft/includes
+INCLUDES = includes libft
 LIB = $(LIB_PATH)/libft.a
 LIB_PATH = libft
 LIB_TERMCAP = -ltermcap
