@@ -4,7 +4,7 @@
 void	ft_builtin_exit(char **cmd)
 {
 	if (!cmd[1])
-		ft_exit_shell(CMD_EXIT, g_shell->ret_cmd);
+		exit_shell(CMD_EXIT, g_shell->return_value);
 	else if (!ft_isnumber(cmd[1]))
 	{
 		ft_put_cmd_error(CMD_EXIT, STR_NUM);
@@ -13,5 +13,5 @@ void	ft_builtin_exit(char **cmd)
 	else if (cmd[2])
 		ft_put_cmd_error(CMD_EXIT, STR_TOO_MANY);
 	else
-		ft_exit_shell(CMD_EXIT, ft_atoi(cmd[1]));
+		exit_shell(CMD_EXIT, ft_atoi(cmd[1]));
 }

@@ -15,7 +15,7 @@ static void	ft_save_in_history(char *line)
 	tmp = ft_strsub(line, 0, ft_strlen(line) - 1);
 	g_shell->history = ft_addtotab(g_shell->history, tmp);
 	free(tmp);
-	g_shell->histo_index = ft_tablen(g_shell->history);
+	g_shell->h_ind = ft_tablen(g_shell->history);
 }
 
 void		ft_read_line(char **line, int len_prompt, int mode)

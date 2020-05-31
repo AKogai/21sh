@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   shell21.h                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sfranc <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/28 12:35:19 by sfranc            #+#    #+#             */
-/*   Updated: 2017/09/27 17:41:57 by sfranc           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef SHELL21_H
 # define SHELL21_H
@@ -31,17 +20,17 @@
 
 typedef struct	s_shell
 {
-	char		**env;
 	t_input		input;
-	int			ret_cmd;
+	char		**env;
 	char		**history;
-	int			histo_index;
+	int			return_value;
+	int			h_ind;
 	int			sigint;
 }				t_shell;
 
 t_shell			*g_shell;
 
-t_shell			*ft_init(char **env);
-void			ft_catch_signals(int exec);
-void			ft_exit_shell(char *str, int ret);
+t_shell			*init(char **env);
+void			signal_handler(int exec);
+void			exit_shell(char *str, int ret);
 #endif

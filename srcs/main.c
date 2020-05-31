@@ -6,13 +6,13 @@ static void	ft_run_cmd(char **argv, t_lexer *lexer)
 
 	if (lexer->last->token_type == NEWLINE)
 	{
-		ft_catch_signals(1);
+		signal_handler(1);
 		ast = ft_create_ast(&lexer->first);
 		if (ast && (ft_strequ(argv[1], "--ast") || ft_strequ(argv[2], "--ast")))
 			ft_print_ast(ast, "root", 0);
-		g_shell->ret_cmd = ft_execute(ast);
+		g_shell->return_value = ft_execute(ast);
 		ft_del_ast(&ast);
-		ft_catch_signals(0);
+		signal_handler(0);
 	}
 }
 
@@ -23,8 +23,8 @@ int			main(int argc, char **argv, char **environ)
 	int		ret_cmd;
 
 	(void)argc;
-	ft_catch_signals(0);
-	g_shell = ft_init(environ);
+	signal_handler(0);
+	g_shell = init(environ);
 	while (1)
 	{
 		g_shell->sigint = 0;
@@ -36,7 +36,7 @@ int			main(int argc, char **argv, char **environ)
 		if (ret_cmd == PARSER_SUCCESS)
 			ft_run_cmd(argv, lexer);
 		else
-			g_shell->ret_cmd = ret_cmd;
+			g_shell->return_value = ret_cmd;
 		ft_dellexer(&lexer);
 		ft_strdel(&line);
 		write(1, "\n", 1);

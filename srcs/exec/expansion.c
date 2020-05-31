@@ -49,7 +49,7 @@ void		ft_var_expansion(char **str, char *dollar)
 	if (*tmp == '?')
 	{
 		key = ft_strdup("?");
-		value = ft_itoa(g_shell->ret_cmd);
+		value = ft_itoa(g_shell->return_value);
 	}
 	else
 	{

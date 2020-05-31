@@ -1,7 +1,7 @@
 
 #include "shell21.h"
 
-void	ft_exit_shell(char *str, int ret)
+void	exit_shell(char *str, int ret)
 {
 	int i;
 

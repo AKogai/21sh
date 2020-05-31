@@ -7,11 +7,11 @@ void		ft_history_back(t_input *input)
 		tputs(tgetstr("bl", NULL), 1, &ft_intputchar);
 	else
 	{
-		if (g_shell->histo_index > 0)
+		if (g_shell->h_ind > 0)
 		{
 			ft_clear_screen(input);
-			ft_insertchar(g_shell->history[g_shell->histo_index - 1], input);
-			g_shell->histo_index--;
+			ft_insertchar(g_shell->history[g_shell->h_ind - 1], input);
+			g_shell->h_ind--;
 		}
 		else
 			tputs(tgetstr("bl", NULL), 1, &ft_intputchar);
@@ -24,11 +24,11 @@ void		ft_history_forth(t_input *input)
 		tputs(tgetstr("bl", NULL), 1, &ft_intputchar);
 	else
 	{
-		if (g_shell->histo_index < ft_tablen(g_shell->history) - 1)
+		if (g_shell->h_ind < ft_tablen(g_shell->history) - 1)
 		{
 			ft_clear_screen(input);
-			g_shell->histo_index++;
-			ft_insertchar(g_shell->history[g_shell->histo_index], input);
+			g_shell->h_ind++;
+			ft_insertchar(g_shell->history[g_shell->h_ind], input);
 		}
 		else
 			tputs(tgetstr("bl", NULL), 1, &ft_intputchar);
@@ -54,7 +54,7 @@ static char	*ft_search_in_history(char *line)
 
 static void	ft_close_termcaps(void)
 {
-	g_shell->ret_cmd = EXIT_SUCCESS;
+	g_shell->return_value = EXIT_SUCCESS;
 	free(g_shell->input.line);
 	free(g_shell->input.tmp);
 	ft_canonic_term();

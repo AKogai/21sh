@@ -49,7 +49,7 @@ static void	ft_update_pwd(char ***env)
 	}
 }
 
-t_shell		*ft_init(char **environ)
+t_shell		*init(char **environ)
 {
 	t_shell	*shell;
 

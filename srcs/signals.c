@@ -5,7 +5,7 @@ static void	ft_sigint_handler(int sig)
 {
 	write(1, "\n", 1);
 	(void)sig;
-	g_shell->ret_cmd = EXIT_FAILURE;
+	g_shell->return_value = EXIT_FAILURE;
 	g_shell->sigint = 1;
 }
 
@@ -52,7 +52,7 @@ static void	ft_sigwinch_handler(int sig)
 		/ (g_shell->input.width + 1);
 }
 
-void		ft_catch_signals(int exec)
+void		signal_handler(int exec)
 {
 	signal(SIGTERM, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);

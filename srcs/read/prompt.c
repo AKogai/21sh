@@ -12,7 +12,7 @@ static char	*ft_get_user(void)
 
 static void	ft_prompt_ret_cmd(void)
 {
-	if (g_shell->ret_cmd == EXIT_SUCCESS)
+	if (g_shell->return_value == EXIT_SUCCESS)
 		ft_putstr(BGREEN" $> "RESET);
 	else
 		ft_putstr(BRED" $> "RESET);
