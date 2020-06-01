@@ -55,12 +55,8 @@ OBJS =  $(SRCS:$(SRCS_PATH)/%.c=$(OBJS_PATH)/%.o)
 INCLUDES = includes libft
 LIB = $(LIB_PATH)/libft.a
 LIB_PATH = libft
-LIB_TERMCAP = -ltermcap
-CC = gcc
 FLAGS = -Wall -Wextra -Werror
-#FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 GREEN = \033[01;32m
-YELLOW = \033[01;33m
 CYAN = \033[01;36m
 RESET = \033[00m
 
@@ -71,9 +67,6 @@ $(NAME): $(LIB) $(OBJS)
 	@echo "$(GREEN)$@ : compilation OK$(RESET)"
 
 $(LIB):
-	@if [ ! -d $(LIB_PATH) ] ; then \
-		git clone https://github.com/shfranc/libft libft; \
-	fi
 	@make -C $(LIB_PATH)
 	@echo "$(GREEN)libft : compilation OK$(RESET)"
 
