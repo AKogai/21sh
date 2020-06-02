@@ -63,8 +63,8 @@ RESET = \033[00m
 all: $(NAME)
 
 $(NAME): $(LIB) $(OBJS)
-	@$(CC) $(FLAGS) -o $@ $^ $(LIB_TERMCAP)
-	@echo "$(GREEN)$@ : compilation OK$(RESET)"
+	@$(CC) $(FLAGS) -o $@ $^ -ltermcap
+	@echo "$(GREEN)$@ : compilation done$(RESET)"
 
 $(LIB):
 	@make -C $(LIB_PATH)
