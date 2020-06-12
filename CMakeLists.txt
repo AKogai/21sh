@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(minishell C)
+project(21sh C)
 
 set(CMAKE_C_STANDARD 99)
 
@@ -12,15 +12,14 @@ add_library(my_lib STATIC IMPORTED)
 set_target_properties(my_lib PROPERTIES
         IMPORTED_LOCATION "${CMAKE_SOURCE_DIR}/libft/libft.a")
 
-file(GLOB SRC "includes/*.h" "src/*.c" "builtin/*.c" "read_line/*.c"
-        #"src/env/*.c"
-        #"src/exec/*.c" "src/expansion/*.c" "src/history/*.c"
-        #"src/lexer/*.c" "src/line_editing/*.c" "src/main/*.c" "src/parser/*.c"
-        #"src/term/*.c" "built_ins/*.c"
-        "libft/libft.h")
+file(GLOB SRC "includes/*.h" "srcs/main.c" "srcs/exit_shell.c"
+        "srcs/init.c" "srcs/signals.c" ""
+        "srcs/builtin/*.c" "srcs/read/*.c"
+        "srcs/exec/*.c" "srcs/lexer/*.c" "srcs/parser/*.c" "libft/libft.h")
 
-add_executable(minishell ${SRC})
+add_executable(21sh ${SRC})
 
-include_directories(libft includes src built_ins read_line)
+include_directories(libft includes src srcs/builtin srcs/read srcs/lexer
+        srcs/parser srcs/exec)
 
-target_link_libraries(minishell my_lib -ltermcap)
+target_link_libraries(21sh my_lib -ltermcap)

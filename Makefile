@@ -1,44 +1,96 @@
 
-NAME = minishell
-SRC_DIR		:= src builtin read_line
-INC_DIR		:= includes
-HEAD		:= $(INC_DIR)/shell.h
-LIB_DIR		:= libft
-LIB_HEAD	:= $(LIB_DIR)/libft.h
-#SYS			:= $(shell uname -s)
+NAME = 21sh
+SRCS_PATH = srcs
+OBJS_PATH = objs
+SRCS = 	$(addprefix $(SRCS_PATH)/, main.c \
+		init.c \
+		signals.c \
+		exit_shell.c \
+		read/term.c \
+		read/read_line.c \
+		read/prompt.c \
+		read/clear.c \
+		read/cursor_moves.c \
+		read/move_commands.c \
+		read/goto.c \
+		read/buffer.c \
+		read/copy_cut.c \
+		read/manage_history.c \
+		read/interpret.c \
+		lexer/list_lexer.c \
+		lexer/print_lexer.c \
+		lexer/tokenize.c \
+		lexer/get_word.c \
+		lexer/get_operator.c \
+		lexer/redirect.c \
+		lexer/quotes.c \
+		parser/parse_command.c \
+		parser/syntax_error.c \
+		parser/read_again.c \
+		parser/remove_quotes.c \
+		parser/create_ast.c \
+		parser/ast_elem.c \
+		parser/print_ast.c \
+		exec/execute.c \
+		exec/simple_cmd.c \
+		exec/expansion.c \
+		exec/quotes_removal.c \
+		exec/heredoc_expand_escape.c \
+		exec/std_fd.c \
+		exec/redirect.c \
+		exec/open_dup.c \
+		exec/agreg_heredoc.c \
+		exec/path.c \
+		exec/pipeline.c \
+		exec/exit_status.c \
+		builtin/launcher.c \
+		builtin/cd.c \
+		builtin/echo.c \
+		builtin/env.c \
+		builtin/history.c \
+		builtin/setenv.c \
+		builtin/unsetenv.c \
+		builtin/exit.c )
+OBJS =  $(SRCS:$(SRCS_PATH)/%.c=$(OBJS_PATH)/%.o)
+INCLUDES = includes libft
+LIB = $(LIB_PATH)/libft.a
+LIB_PATH = libft
+FLAGS = -Wall -Wextra -Werror
+GREEN = \033[01;32m
+CYAN = \033[01;36m
+RESET = \033[00m
 
-SRC := $(foreach DIR,$(SRC_DIR), $(wildcard $(DIR)/*.c))
+all: $(NAME)
 
-#ifeq ($(SYS), Linux)
-#SRC := $(foreach DIR,$(SRC_DIR), $(wildcard $(DIR)/*.c))
-#endif
-#ifeq ($(SYS), Darwin)
-#	SRC := src/cmd_manipulation.c src/env_ops.c src/error_handling.c \
-#	 	src/exec_cmd_ops.c src/expansions.c \
-#		src/init_env.c src/path_ops.c src/shell.c
-#endif
+$(NAME): $(LIB) $(OBJS)
+	@$(CC) $(FLAGS) -o $@ $^ -ltermcap
+	@echo "$(GREEN)$@ : compilation done$(RESET)"
 
-#OBJS		:= $(foreach DIR,$(SRC_DIR), $(wildcard $(DIR)/*.o))
-CFLAGS		:= -Wall -Wextra -Werror
-OFLAGS		:= -O3
-INCL		:= -I $(LIB_DIR) -I $(HEAD)
-LIB			:= -L $(LIB_DIR) -lft -ltermcap
+$(LIB):
+	@make -C $(LIB_PATH)
+	@echo "$(GREEN)libft : compilation OK$(RESET)"
 
-.PHONY: all
-all : $(NAME)
-
-$(NAME) : $(SRC) $(HEAD) $(LIB_HEAD)
-	@echo $(SYS)
-	@make -C $(LIB_DIR)
-	clang $(CFLAGS) $(OFLAGS) $(SRC) -I $(LIB_DIR) -I $(INC_DIR) $(LIB) -o $@
+$(OBJS_PATH)/%.o: $(SRCS_PATH)/%.c $(INCLUDES)
+	@mkdir -p $(OBJS_PATH)/builtin
+	@mkdir -p $(OBJS_PATH)/read
+	@mkdir -p $(OBJS_PATH)/lexer
+	@mkdir -p $(OBJS_PATH)/parser
+	@mkdir -p $(OBJS_PATH)/exec
+	@$(CC) $(FLAGS) -o $@ -c $< $(addprefix -I , $(INCLUDES))
+	@echo "$@ : $(YELLOW)OK$(RESET)"
 
 clean:
-	@make -C $(LIB_DIR) clean
-	@echo  "Object files removed!"
+	@make clean -C $(LIB_PATH)
+	@echo "clean $(LIB_PATH)/objs : $(CYAN)clean$(RESET)"
+	@rm -f $(OBJS)
+	@echo "clean $(OBJS): $(CYAN)clean$(RESET)"
 
 fclean: clean
-	@make -C $(LIB_DIR) fclean
+	@make fclean -C $(LIB_PATH)
+	@echo "clean $(LIB) : $(CYAN)clean$(RESET)"
 	@rm -f $(NAME)
-	@echo "Binary files has been removed!"
+	@echo "clean $(NAME) : $(CYAN)clean$(RESET)"
 
 re: fclean all
+
+.PHONY: clean fclean re

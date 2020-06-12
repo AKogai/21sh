@@ -27,7 +27,9 @@ ft_putnbr_w.c ft_max.c ft_putstr_w.c ft_lstappend.c ft_swap.c get_next_line.c \
 ft_free_array.c ft_error_msg.c ft_dlstadd.c ft_dlstdel.c ft_free_string_tab.c \
 ft_putchar_termcaps.c ft_str_isdigit.c ft_strjoin_free.c ft_strnjoin.c \
 ft_dlstnew.c ft_strsplit_wd.c ft_strappend.c ft_freetab.c ft_addtotab.c \
-ft_tabdup.c ft_exit.c ft_tablen.c ft_putstr1.c ft_intputchar.c ft_print_array.c
+ft_tabdup.c ft_exit.c ft_tablen.c ft_putstr1.c ft_intputchar.c ft_print_array.c \
+ft_puttab.c ft_isnumber.c ft_supprtotab.c ft_strjoin3.c ft_charappend.c \
+ft_putnbr_endl.c ft_strmerge.c
 
 OBJ = $(SRC:%.c=%.o)
 
