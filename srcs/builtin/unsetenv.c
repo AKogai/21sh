@@ -32,7 +32,7 @@ int		ft_builtin_unsetenv(char **cmd)
 	while (cmd[i])
 	{
 		if ((suppr = ft_isinenv(cmd[i])) != -1)
-			ft_supprtotab(g_shell->env, suppr);
+			g_shell->env = ft_supprtotab(g_shell->env, suppr);
 		i++;
 	}
 	return (EXIT_SUCCESS);

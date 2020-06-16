@@ -39,7 +39,6 @@ int			main(int argc, char **argv, char **environ)
 			g_shell->return_value = ret_cmd;
 		ft_dellexer(&lexer);
 		ft_strdel(&line);
-		write(1, "\n", 1);
 	}
 	return (0);
 }

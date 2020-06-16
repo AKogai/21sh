@@ -67,5 +67,5 @@ void	ft_modify_variable(char ***env, char *new_var)
 		i++;
 	}
 	free(temp_var);
-	ft_addtotab(*env, new_var);
+	*env = ft_addtotab(*env, new_var);
 }
