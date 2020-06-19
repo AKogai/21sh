@@ -7,4 +7,5 @@ Current project for 21 school
 Debug:
 GDB to LLDB command map->  https://lldb.llvm.org/use/map.html
 
+Termcap library:
 https://www.gnu.org/software/termutils/manual/termcap-1.3/html_mono/termcap.html#SEC4
