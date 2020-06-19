@@ -3,6 +3,9 @@ Current project for 21 school
 
 
  Some useful links:
+ 
+Debug:
+GDB to LLDB command map->
 
 https://lldb.llvm.org/use/map.html
 
