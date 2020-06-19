@@ -4,5 +4,6 @@ Current project for 21 school
 
  Some useful links:
 
-https://lldb.llvm.org/use/map.html /n
+https://lldb.llvm.org/use/map.html
+
 https://www.gnu.org/software/termutils/manual/termcap-1.3/html_mono/termcap.html#SEC4
