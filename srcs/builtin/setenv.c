@@ -13,12 +13,12 @@ int		ft_is_valid_name(char *str)
 	return (1);
 }
 
-int		ft_builtin_setenv(char **cmd)
+int		ft_builtin_setenv(t_shell *shell, char **cmd)
 {
 	char	*var;
 
 	if (!cmd[1])
-		ft_puttab(g_shell->env);
+		ft_puttab(shell->env);
 	else if (ft_is_valid_name(cmd[1]))
 	{
 		if (!cmd[2])
@@ -30,7 +30,7 @@ int		ft_builtin_setenv(char **cmd)
 			ft_put_cmd_error(CMD_SETENV, STR_TOO_MANY);
 			return (EXIT_FAILURE);
 		}
-		ft_modify_variable(&g_shell->env, var);
+		ft_modify_variable(&shell->env, var);
 		free(var);
 	}
 	else

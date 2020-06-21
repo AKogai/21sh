@@ -11,21 +11,21 @@ int		ft_is_builtin(char *cmd)
 	return (0);
 }
 
-int		ft_launch_builtin(char **cmd)
+int		ft_launch_builtin(t_shell *shell, char **cmd)
 {
 	if (ft_strequ(*cmd, CMD_ECHO))
 		return (ft_builtin_echo(cmd));
 	if (ft_strequ(*cmd, CMD_CD))
-		return (ft_builtin_cd(cmd));
+		return (ft_builtin_cd(shell, cmd));
 	if (ft_strequ(*cmd, CMD_ENV))
-		return (ft_builtin_env(cmd));
+		return (ft_builtin_env(shell, cmd));
 	if (ft_strequ(*cmd, CMD_SETENV))
-		return (ft_builtin_setenv(cmd));
+		return (ft_builtin_setenv(shell, cmd));
 	if (ft_strequ(*cmd, CMD_UNSETENV))
-		return (ft_builtin_unsetenv(cmd));
+		return (ft_builtin_unsetenv(shell, cmd));
 	if (ft_strequ(*cmd, CMD_HIST))
-		return (ft_builtin_history(cmd));
+		return (ft_builtin_history(shell, cmd));
 	if (ft_strequ(*cmd, CMD_EXIT))
-		ft_builtin_exit(cmd);
+		ft_builtin_exit(shell, cmd);
 	return (0);
 }

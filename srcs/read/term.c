@@ -23,14 +23,14 @@ void	ft_init_input_struct(t_input *input, int len_prompt)
 	input->origin_prompt = len_prompt;
 }
 
-void	ft_raw_term(void)
+void	ft_raw_term(t_shell *shell)
 {
 	const char		*term_type;
 	int				ret;
 	struct termios	term;
 
 	term_type = NULL;
-	if ((term_type = ft_get_env_variable(g_shell->env, "TERM")))
+	if ((term_type = ft_get_env_variable(shell->env, "TERM")))
 		ret = tgetent(NULL, term_type);
 	else
 		ret = tgetent(NULL, DEFAULT_TERM);

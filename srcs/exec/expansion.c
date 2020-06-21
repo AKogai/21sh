@@ -1,12 +1,12 @@
 
 #include "shell21.h"
 
-static int	ft_tilde_expansion(char **str, char *tilde)
+static int	ft_tilde_expansion(t_shell *shell, char **str, char *tilde)
 {
 	char *home;
 	char *exp;
 
-	if (!(home = ft_get_env_variable(g_shell->env, "HOME")))
+	if (!(home = ft_get_env_variable(shell->env, "HOME")))
 		return (0);
 	exp = ft_memalloc(ft_strlen(*str) + ft_strlen(home));
 	ft_memmove(exp, *str, tilde - *str);
@@ -38,7 +38,7 @@ static char	*ft_expand_new_str(char *str, char *dollar, char *key, char *value)
 	return (exp);
 }
 
-void		ft_var_expansion(char **str, char *dollar)
+void		ft_var_expansion(t_shell *shell, char **str, char *dollar)
 {
 	char	*key;
 	char	*value;
@@ -49,14 +49,14 @@ void		ft_var_expansion(char **str, char *dollar)
 	if (*tmp == '?')
 	{
 		key = ft_strdup("?");
-		value = ft_itoa(g_shell->return_value);
+		value = ft_itoa(shell->return_value);
 	}
 	else
 	{
 		key = NULL;
 		while (*tmp && (ft_isalnum(*tmp) || *tmp == '_'))
 			key = ft_charappend(key, *tmp++);
-		value = ft_get_env_variable(g_shell->env, key);
+		value = ft_get_env_variable(shell->env, key);
 	}
 	exp = ft_expand_new_str(*str, dollar, key, value);
 	free(key);
@@ -74,7 +74,7 @@ int			ft_is_valid_expand(char *dollar)
 		return (1);
 }
 
-void		ft_expand(t_token *token)
+void		ft_expand(t_shell *shell, t_token *token)
 {
 	t_token *tmp;
 	char	*tilde;
@@ -88,7 +88,7 @@ void		ft_expand(t_token *token)
 			while ((tilde = ft_strchr(tmp->str, '~'))\
 					&& !ft_is_quoted(tmp->str, tilde))
 			{
-				if (!(ft_tilde_expansion(&tmp->str, tilde)))
+				if (!(ft_tilde_expansion(shell, &tmp->str, tilde)))
 					break ;
 			}
 			while ((dollar = ft_strchr(tmp->str, '$'))\
@@ -96,7 +96,7 @@ void		ft_expand(t_token *token)
 			{
 				if (!ft_is_valid_expand(dollar))
 					break ;
-				ft_var_expansion(&tmp->str, dollar);
+				ft_var_expansion(shell, &tmp->str, dollar);
 			}
 		}
 		tmp = tmp->next;

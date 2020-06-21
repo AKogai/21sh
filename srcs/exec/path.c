@@ -53,7 +53,7 @@ static int		ft_test_path(char *cmd, char **cmd_path, char **test)
 	return (ret);
 }
 
-static int		ft_search_through_path(char *cmd, char **cmd_path)
+static int		ft_search_through_path(t_shell *shell, char *cmd, char **cmd_path)
 {
 	char	*tmp;
 	char	**path;
@@ -62,7 +62,7 @@ static int		ft_search_through_path(char *cmd, char **cmd_path)
 	int		i;
 
 	ret = CMD_NOT_FOUND;
-	tmp = ft_get_env_variable(g_shell->env, "PATH");
+	tmp = ft_get_env_variable(shell->env, "PATH");
 	path = ft_strsplit(tmp, ':');
 	i = 0;
 	while (path && path[i])
@@ -82,7 +82,7 @@ static int		ft_search_through_path(char *cmd, char **cmd_path)
 	return (ret);
 }
 
-int				ft_get_path(char *cmd, char **cmd_path)
+int				ft_get_path(t_shell *shell, char *cmd, char **cmd_path)
 {
 	if (ft_strchr(cmd, '/'))
 		return (ft_check_given_path(cmd, cmd_path));
@@ -94,6 +94,6 @@ int				ft_get_path(char *cmd, char **cmd_path)
 			return (CMD_NOT_FOUND);
 		}
 		else
-			return (ft_search_through_path(cmd, cmd_path));
+			return (ft_search_through_path(shell, cmd, cmd_path));
 	}
 }

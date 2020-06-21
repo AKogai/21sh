@@ -1,90 +1,90 @@
 
 #include "shell21.h"
 
-void		ft_history_back(t_input *input)
+void		ft_history_back(t_shell *shell)
 {
-	if (!g_shell->history)
+	if (!shell->history)
 		tputs(tgetstr("bl", NULL), 1, &ft_intputchar);
 	else
 	{
-		if (g_shell->h_ind > 0)
+		if (shell->h_ind > 0)
 		{
-			ft_clear_screen(input);
-			ft_insertchar(g_shell->history[g_shell->h_ind - 1], input);
-			g_shell->h_ind--;
+			ft_clear_screen(&shell->input);
+			ft_insertchar(shell->history[shell->h_ind - 1], &shell->input);
+			shell->h_ind--;
 		}
 		else
 			tputs(tgetstr("bl", NULL), 1, &ft_intputchar);
 	}
 }
 
-void		ft_history_forth(t_input *input)
+void		ft_history_forth(t_shell *shell)
 {
-	if (!g_shell->history)
+	if (!shell->history)
 		tputs(tgetstr("bl", NULL), 1, &ft_intputchar);
 	else
 	{
-		if (g_shell->h_ind < ft_tablen(g_shell->history) - 1)
+		if (shell->h_ind < ft_tablen(shell->history) - 1)
 		{
-			ft_clear_screen(input);
-			g_shell->h_ind++;
-			ft_insertchar(g_shell->history[g_shell->h_ind], input);
+			ft_clear_screen(&shell->input);
+			shell->h_ind++;
+			ft_insertchar(shell->history[shell->h_ind], &shell->input);
 		}
 		else
 			tputs(tgetstr("bl", NULL), 1, &ft_intputchar);
 	}
 }
 
-static char	*ft_search_in_history(char *line)
+static char	*ft_search_in_history(t_shell *shell, char *line)
 {
 	int		len;
 
 	if (!line || !*line)
 		return (NULL);
-	if (!g_shell->history)
+	if (!shell->history)
 		return (NULL);
-	len = ft_tablen(g_shell->history);
+	len = ft_tablen(shell->history);
 	while (len--)
 	{
-		if (ft_strstr(g_shell->history[len], line))
-			return (ft_strdup(g_shell->history[len]));
+		if (ft_strstr(shell->history[len], line))
+			return (ft_strdup(shell->history[len]));
 	}
 	return (NULL);
 }
 
-static void	ft_close_termcaps(void)
+static void	ft_close_termcaps(t_shell *shell)
 {
-	g_shell->return_value = EXIT_SUCCESS;
-	free(g_shell->input.line);
-	free(g_shell->input.tmp);
+	shell->return_value = EXIT_SUCCESS;
+	free(shell->input.line);
+	free(shell->input.tmp);
 	ft_canonic_term();
 	write(1, "\n", 1);
 }
 
-void		ft_history_search(t_input *input)
+void		ft_history_search(t_shell *shell)
 {
 	char	*line;
 	char	*little;
 	char	*tmp;
 
-	ft_clear_screen(input);
-	ft_close_termcaps();
-	ft_read_line(&line, write(1, HISTO_PROMPT, ft_strlen(HISTO_PROMPT)), 3);
-	ft_raw_term();
+	ft_clear_screen(&shell->input);
+	ft_close_termcaps(shell);
+	ft_read_line(shell, &line, write(1, HISTO_PROMPT, ft_strlen(HISTO_PROMPT)), 3);
+	ft_raw_term(shell);
 	tmp = NULL;
-	if (!g_shell->sigint)
+	if (!shell->sigint)
 	{
 		little = ft_strsub(line, 0, ft_strlen(line) - 1);
-		if (!(tmp = ft_search_in_history(little)))
+		if (!(tmp = ft_search_in_history(shell, little)))
 		{
 			ft_putendl("No match found...");
 			tmp = ft_strdup(little);
 		}
 		free(little);
 	}
-	ft_init_input_struct(&g_shell->input, ft_display_prompt());
+	ft_init_input_struct(&shell->input, ft_display_prompt(shell));
 	if (tmp)
-		ft_insertchar(tmp, input);
+		ft_insertchar(tmp, &shell->input);
 	free(tmp);
 	free(line);
 }

@@ -14,7 +14,7 @@ static char	*ft_heredoc_remove_escape(char *str)
 	return (str);
 }
 
-static void	ft_heredoc_expand(t_token *dless)
+static void	ft_heredoc_expand(t_shell *shell, t_token *dless)
 {
 	char *dollar;
 
@@ -23,7 +23,7 @@ static void	ft_heredoc_expand(t_token *dless)
 	{
 		if (!ft_is_valid_expand(dollar))
 			break ;
-		ft_var_expansion(&dless->heredoc, dollar);
+		ft_var_expansion(shell, &dless->heredoc, dollar);
 	}
 }
 
@@ -49,13 +49,13 @@ static void	ft_heredoc_remove_quoting(char **heredoc)
 	*heredoc = new;
 }
 
-void		ft_heredoc_expand_remove_quoting(t_token *dless)
+void		ft_heredoc_expand_remove_quoting(t_shell *shell, t_token *dless)
 {
 	if (!ft_strchr(dless->next->str, '"')\
 			&& !ft_strchr(dless->next->str, '\'')\
 				&& !ft_strchr(dless->next->str, '\\'))
 	{
-		ft_heredoc_expand(dless);
+		ft_heredoc_expand(shell, dless);
 		ft_heredoc_remove_quoting(&dless->heredoc);
 	}
 }

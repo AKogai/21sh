@@ -28,32 +28,32 @@ static void	ft_interpret_moves(char *buff, t_input *input)
 		ft_jumpword_backward(input);
 }
 
-static int	ft_interpret_buffer(char *buff, t_input *input, int mode)
+static int	ft_interpret_buffer(char *buff, t_shell *shell, int mode)
 {
 	if (buff[0] == 27 && buff[1] == 91 && buff[2] == 65)
-		ft_history_back(input);
+		ft_history_back(shell);
 	else if (buff[0] == 27 && buff[1] == 91 && buff[2] == 66)
-		ft_history_forth(input);
+		ft_history_forth(shell);
 	else if (buff[0] == 18 && !mode)
-		ft_history_search(input);
+		ft_history_search(shell);
 	else if (buff[0] == 11)
-		ft_copy(input);
+		ft_copy(&shell->input);
 	else if (buff[0] == 24)
-		ft_cut(input);
+		ft_cut(&shell->input);
 	else if (buff[0] == 9)
 	{
-		if (ft_insertchar(input->tmp, input))
+		if (ft_insertchar(shell->input.tmp, &shell->input))
 			return (1);
 	}
 	else if (ft_isprint(buff[0]))
 	{
-		if (ft_insertchar(buff, input))
+		if (ft_insertchar(buff, &shell->input))
 			return (1);
 	}
 	else if (buff[0] == 127)
-		ft_back_deletechar(input);
+		ft_back_deletechar(&shell->input);
 	else if (buff[0] == 27 && buff[1] == 91 && buff[2] == 51 && buff[3] == 126)
-		ft_deletechar(input);
+		ft_deletechar(&shell->input);
 	return (0);
 }
 
@@ -84,15 +84,15 @@ static int	ft_interpret_other_actions(char *buff, t_input *input, int mode)
 	return (0);
 }
 
-int			ft_interpret(char *buff, t_input *input, int mode)
+int			ft_interpret(char *buff, t_shell *shell, int mode)
 {
-	ft_interpret_moves(buff, input);
-	if (ft_interpret_buffer(buff, input, mode))
+	ft_interpret_moves(buff, &shell->input);
+	if (ft_interpret_buffer(buff, shell, mode))
 	{
-		ft_accept_line(input);
+		ft_accept_line(&shell->input);
 		return (1);
 	}
-	if (ft_interpret_other_actions(buff, input, mode))
+	if (ft_interpret_other_actions(buff, &shell->input, mode))
 		return (1);
 	return (0);
 }

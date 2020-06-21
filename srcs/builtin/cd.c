@@ -15,16 +15,16 @@ static void	ft_put_cd_error(char *dir, int err)
 	free(tmp);
 }
 
-static void	ft_modify_env(char *key, char *name)
+static void	ft_modify_env(t_shell *shell, char *key, char *name)
 {
 	char	*var;
 
 	var = ft_strjoin(key, name);
-	ft_modify_variable(&g_shell->env, var);
+	ft_modify_variable(&shell->env, var);
 	free(var);
 }
 
-static int	ft_move_to_dest(char *dest)
+static int	ft_move_to_dest(t_shell *shell, char *dest)
 {
 	char	*old_pwd;
 	char	*pwd;
@@ -34,8 +34,8 @@ static int	ft_move_to_dest(char *dest)
 	if ((chdir(dest)) != -1)
 	{
 		pwd = getcwd(NULL, 0);
-		pwd ? ft_modify_env("PWD=", pwd) : 0;
-		old_pwd ? ft_modify_env("OLDPWD=", old_pwd) : 0;
+		pwd ? ft_modify_env(shell, "PWD=", pwd) : 0;
+		old_pwd ? ft_modify_env(shell, "OLDPWD=", old_pwd) : 0;
 		free(old_pwd);
 		free(pwd);
 		free(dest);
@@ -50,13 +50,13 @@ static int	ft_move_to_dest(char *dest)
 	}
 }
 
-int			ft_builtin_cd(char **cmd)
+int			ft_builtin_cd(t_shell *shell, char **cmd)
 {
 	char	*dest;
 
 	if (!cmd[1])
 	{
-		if (!(dest = ft_get_env_variable(g_shell->env, "HOME")))
+		if (!(dest = ft_get_env_variable(shell->env, "HOME")))
 		{
 			ft_put_cmd_error(CMD_CD, STR_HOME);
 			return (EXIT_FAILURE);
@@ -64,7 +64,7 @@ int			ft_builtin_cd(char **cmd)
 	}
 	else if (ft_strequ(cmd[1], "-"))
 	{
-		if (!(dest = ft_get_env_variable(g_shell->env, "OLDPWD")))
+		if (!(dest = ft_get_env_variable(shell->env, "OLDPWD")))
 		{
 			ft_put_cmd_error(CMD_CD, STR_OLDPWD);
 			return (EXIT_FAILURE);
@@ -73,5 +73,5 @@ int			ft_builtin_cd(char **cmd)
 	}
 	else
 		dest = ft_strdup(cmd[1]);
-	return (ft_move_to_dest(dest));
+	return (ft_move_to_dest(shell, dest));
 }
