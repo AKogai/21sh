@@ -61,8 +61,10 @@ static int		ft_search_through_path(t_shell *shell, char *cmd, char **cmd_path)
 	int		ret;
 	int		i;
 
+	if (shell)
+		;
 	ret = CMD_NOT_FOUND;
-	tmp = ft_get_env_variable(shell->env, "PATH");
+	tmp = getenv("PATH");
 	path = ft_strsplit(tmp, ':');
 	i = 0;
 	while (path && path[i])
@@ -76,7 +78,7 @@ static int		ft_search_through_path(t_shell *shell, char *cmd, char **cmd_path)
 		++i;
 		free(test);
 	}
-	free(tmp);
+//	free(tmp);
 	ft_freetab(&path);
 	ret == CMD_NOT_FOUND ? ft_put_cmd_error(cmd, STR_CMD_NOT_FOUND) : 0;
 	return (ret);

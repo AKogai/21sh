@@ -8,13 +8,13 @@ static void	ft_increase_shlvl(char ***env)
 	char	*newlvl;
 	int		lvl;
 
-	if ((shlvl = ft_get_env_variable(*env, "SHLVL")))
+	if ((shlvl = getenv("SHLVL")))
 	{
 		lvl = ft_atoi(shlvl) + 1;
 		newlvl = ft_itoa(lvl);
 		temp = shlvl;
 		shlvl = ft_strjoin("SHLVL=", newlvl);
-		free(temp);
+//		free(temp);
 		free(newlvl);
 		ft_modify_variable(env, shlvl);
 		free(shlvl);
@@ -31,13 +31,13 @@ static void	ft_update_pwd(char ***env)
 
 	if (!(cwd = getcwd(NULL, 0)))
 		return ;
-	if ((pwd = ft_get_env_variable(*env, "PWD")))
+	if ((pwd = getenv("PWD")))
 	{
 		temp = cwd;
 		cwd = ft_strjoin("PWD=", cwd);
 		free(temp);
 		ft_modify_variable(env, cwd);
-		free(pwd);
+//		free(pwd);
 		free(cwd);
 	}
 	else

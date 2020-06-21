@@ -56,7 +56,7 @@ int			ft_builtin_cd(t_shell *shell, char **cmd)
 
 	if (!cmd[1])
 	{
-		if (!(dest = ft_get_env_variable(shell->env, "HOME")))
+		if (!(dest = getenv("HOME")))
 		{
 			ft_put_cmd_error(CMD_CD, STR_HOME);
 			return (EXIT_FAILURE);
@@ -64,7 +64,7 @@ int			ft_builtin_cd(t_shell *shell, char **cmd)
 	}
 	else if (ft_strequ(cmd[1], "-"))
 	{
-		if (!(dest = ft_get_env_variable(shell->env, "OLDPWD")))
+		if (!(dest = getenv("OLDPWD")))
 		{
 			ft_put_cmd_error(CMD_CD, STR_OLDPWD);
 			return (EXIT_FAILURE);

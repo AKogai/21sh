@@ -6,7 +6,9 @@ static int	ft_tilde_expansion(t_shell *shell, char **str, char *tilde)
 	char *home;
 	char *exp;
 
-	if (!(home = ft_get_env_variable(shell->env, "HOME")))
+	if (shell)
+		;
+	if (!(home = getenv("HOME")))
 		return (0);
 	exp = ft_memalloc(ft_strlen(*str) + ft_strlen(home));
 	ft_memmove(exp, *str, tilde - *str);
@@ -56,7 +58,7 @@ void		ft_var_expansion(t_shell *shell, char **str, char *dollar)
 		key = NULL;
 		while (*tmp && (ft_isalnum(*tmp) || *tmp == '_'))
 			key = ft_charappend(key, *tmp++);
-		value = ft_get_env_variable(shell->env, key);
+		value = getenv(key);
 	}
 	exp = ft_expand_new_str(*str, dollar, key, value);
 	free(key);

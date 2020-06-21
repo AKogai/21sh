@@ -30,12 +30,14 @@ void	ft_raw_term(t_shell *shell)
 	struct termios	term;
 
 	term_type = NULL;
-	if ((term_type = ft_get_env_variable(shell->env, "TERM")))
+	if (shell)
+		;
+	if ((term_type = getenv("TERM")))
 		ret = tgetent(NULL, term_type);
 	else
 		ret = tgetent(NULL, DEFAULT_TERM);
-	if (term_type)
-		free((void*)term_type);
+//	if (term_type)
+//		free((void*)term_type);
 	if (ret < 0)
 		ft_exit("tgetent: No access to the termcap database.", 1);
 	if (ret == 0)

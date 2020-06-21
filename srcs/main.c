@@ -23,6 +23,7 @@ int			main(int argc, char **argv, char **environ)
 	t_shell	*shell;
 	int		ret_cmd;
 
+	lexer = NULL;
 	(void)argc;
 	shell = init(environ);
 	signal_handler(shell, 0);

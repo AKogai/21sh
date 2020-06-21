@@ -230,7 +230,7 @@ int		ft_builtin_history(t_shell *shell, char **cmd);
 /*
 ** ENV
 */
-char	*ft_get_env_variable(char **env, char *var);
+//char	*ft_get_env_variable(char **env, char *var);
 void	ft_modify_variable(char ***env, char *new_var);
 
 

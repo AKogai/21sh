@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
+
 project(21sh C)
 
 set(CMAKE_C_STANDARD 99)
