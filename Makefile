@@ -55,10 +55,11 @@ OBJS =  $(SRCS:$(SRCS_PATH)/%.c=$(OBJS_PATH)/%.o)
 INCLUDES = includes libft
 LIB = $(LIB_PATH)/libft.a
 LIB_PATH = libft
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 GREEN = \033[01;32m
 CYAN = \033[01;36m
 RESET = \033[00m
+CC = clang
 
 all: $(NAME)
 
