@@ -20,7 +20,7 @@ static void	ft_increase_shlvl(char ***env)
 		free(shlvl);
 	}
 	else
-		ft_addtotab(*env, "SHLVL=1");
+		*env = ft_addtotab(*env, "SHLVL=1");
 }
 
 static void	ft_update_pwd(char ***env)
@@ -43,7 +43,7 @@ static void	ft_update_pwd(char ***env)
 	else
 	{
 		pwd = ft_strjoin("PWD=", cwd);
-		ft_addtotab(*env, pwd);
+		*env = ft_addtotab(*env, pwd);
 		free(pwd);
 		free(cwd);
 	}
