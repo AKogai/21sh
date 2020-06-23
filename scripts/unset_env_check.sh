@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 VALGRIND_PATH=$(which valgrind)
-
-VALGRIND_FLAGS='--leak-check=full --track-origins=yes'
+VALGRIND_FLAGS="--leak-check=full --track-origins=yes"
 
 echo $VALGRIND_PATH
 
@@ -15,6 +14,7 @@ function clear_tmp() {
 }
 
 clear_tmp
+
 $VALGRIND_PATH $VALGRIND_FLAGS .././21sh
 
 exit 0
