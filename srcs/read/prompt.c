@@ -10,12 +10,9 @@ static char	*ft_get_user(void)
 	return (ft_strdup(ret_pwd->pw_name));
 }
 
-static void	ft_prompt_ret_cmd(t_shell *shell)
+static void	ft_prompt_ret_cmd(void)
 {
-	if (shell->return_value == EXIT_SUCCESS)
-		ft_putstr(BGREEN" $> "RESET);
-	else
-		ft_putstr(BRED" $> "RESET);
+	ft_putstr(BGREEN" $> "RESET);
 }
 
 int			ft_put_prompt_sigint(t_shell *shell)
@@ -25,12 +22,12 @@ int			ft_put_prompt_sigint(t_shell *shell)
 	ft_raw_term(shell);
 	tputs(tgetstr("cr", NULL), 1, &ft_intputchar);
 	tputs(tgetstr("ce", NULL), 1, &ft_intputchar);
-	len = ft_display_prompt(shell);
+	len = ft_display_prompt();
 	ft_canonic_term();
 	return (len);
 }
 
-int			ft_display_prompt(t_shell *shell)
+int			ft_display_prompt(void)
 {
 	char	*user;
 	char	*cwd;
@@ -56,6 +53,6 @@ int			ft_display_prompt(t_shell *shell)
 		len += ft_strlen(cwd);
 	}
 	free(cwd);
-	ft_prompt_ret_cmd(shell);
+	ft_prompt_ret_cmd();
 	return (len);
 }

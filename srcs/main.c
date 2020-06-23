@@ -12,7 +12,7 @@ static void	ft_run_cmd(t_shell *shell, char **argv, t_lexer *lexer)
 			ft_print_ast(ast, "root", 0);
 		shell->return_value = ft_execute(shell, ast);
 		ft_del_ast(&ast);
-		signal_handler(shell, 1);
+		signal_handler(shell, 0);
 	}
 }
 
@@ -25,7 +25,7 @@ int			main(int argc, char **argv, char **environ)
 
 	(void)argc;
 	shell = init(environ);
-	signal_handler(shell, 1);
+	signal_handler(shell, 0);
 	while (1)
 	{
 		shell->sigint = 0;

@@ -82,7 +82,7 @@ void		ft_history_search(t_shell *shell)
 		}
 		free(little);
 	}
-	ft_init_input_struct(&shell->input, ft_display_prompt(shell));
+	ft_init_input_struct(&shell->input, ft_display_prompt());
 	if (tmp)
 		ft_insertchar(tmp, &shell->input);
 	free(tmp);

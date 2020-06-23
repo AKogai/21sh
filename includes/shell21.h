@@ -38,7 +38,6 @@ typedef struct	s_shell
 
 t_shell			*init(char **env);
 void			signal_handler(t_shell *shell, int exec);
-void			*ft_sigint_handler(int sig);
 void			exit_shell(t_shell *shell, char *str, int ret);
 
 /*
@@ -131,7 +130,7 @@ void			ft_clear_screen(t_input *input);
 ** PROMPT
 */
 int				ft_put_prompt_sigint(t_shell *shell);
-int				ft_display_prompt(t_shell *shell);
+int				ft_display_prompt(void);
 
 /*
 ** HISTORY
