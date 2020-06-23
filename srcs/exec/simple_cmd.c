@@ -36,7 +36,7 @@ int		ft_fork(t_shell *shell, char *path, char **cmd)
 			ft_exit(STR_EXECVE_ERROR, 1);
 	}
 	else
-		wait(&status);
+		waitpid(pid, &status, 0);
 	return (ft_exit_status(status));
 }
 

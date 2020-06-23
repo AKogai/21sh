@@ -33,7 +33,6 @@ static int		ft_execute_orif_list(t_shell *shell, t_ast *ast)
 
 int				ft_execute(t_shell *shell, t_ast *ast)
 {
-
 	if (!ast)
 		return (EXIT_SUCCESS);
 	if (ast->operator_type == SEMI)

@@ -38,6 +38,7 @@ typedef struct	s_shell
 
 t_shell			*init(char **env);
 void			signal_handler(t_shell *shell, int exec);
+void			*ft_sigint_handler(int sig);
 void			exit_shell(t_shell *shell, char *str, int ret);
 
 /*
@@ -51,7 +52,7 @@ void			exit_shell(t_shell *shell, char *str, int ret);
 # include <uuid/uuid.h>
 
 # define INPUTSIZE		4096
-# define BUFFSIZE		6
+# define BUFFSIZE		4096
 # define DEFAULT_TERM	"xterm-256color"
 # define HISTO_PROMPT	"search_history> "
 

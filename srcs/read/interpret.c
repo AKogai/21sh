@@ -59,7 +59,9 @@ static int	ft_interpret_buffer(char *buff, t_shell *shell, int mode)
 
 static int	ft_interpret_other_actions(char *buff, t_input *input, int mode)
 {
-	if (buff[0] == 12)
+	if (buff[0] == 3)
+		return (1);
+	else if (buff[0] == 12)
 		ft_clear_screen(input);
 	else if (buff[0] == '\n')
 	{
