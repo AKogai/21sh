@@ -64,7 +64,7 @@ CC = clang
 all: $(NAME)
 
 $(NAME): $(LIB) $(OBJS)
-	@$(CC) $(FLAGS) -o $@ $^ -ltermcap
+	@$(CC) $(FLAGS) -o $@ $^ $(LIB) -ltermcap
 	@echo "$(GREEN)$@ : compilation done$(RESET)"
 
 $(LIB):
