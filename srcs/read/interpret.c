@@ -14,17 +14,17 @@ static void	ft_interpret_moves(char *buff, t_input *input)
 		ft_move_right(input);
 	else if (buff[0] == 27 && buff[1] == 91 && buff[2] == 68)
 		ft_move_left(input);
-	else if (buff[0] == 27 && buff[1] == 91 && buff[2] == 53 && buff[3] == 126)
+	else if (buff[0] == 27 && buff[1] == 107)
 		ft_move_up(input);
-	else if (buff[0] == 27 && buff[1] == 91 && buff[2] == 54 && buff[3] == 126)
+	else if (buff[0] == 27 && buff[1] == 108)
 		ft_move_down(input);
 	else if (buff[0] == 1 || (buff[0] == 27 && buff[1] == 91 && buff[2] == 72))
 		ft_beginning_of_line(input);
 	else if (buff[0] == 5 || (buff[0] == 27 && buff[1] == 91 && buff[2] == 70))
 		ft_end_of_line(input);
-	else if (buff[0] == 27 && buff[1] == 91 && buff[2] == 49 && buff[3] == 59 && buff[4] == 53 && buff[5] == 67)
+	else if (buff[0] == 27 && buff[1] == 102)
 		ft_jumpword_forward(input);
-	else if (buff[0] == 27 && buff[1] == 91 && buff[2] == 49 && buff[3] == 59 && buff[4] == 53 && buff[5] == 68)
+	else if (buff[0] == 27 && buff[1] == 98)
 		ft_jumpword_backward(input);
 }
 
