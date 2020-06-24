@@ -22,9 +22,9 @@ static void	ft_interpret_moves(char *buff, t_input *input)
 		ft_beginning_of_line(input);
 	else if (buff[0] == 5 || (buff[0] == 27 && buff[1] == 91 && buff[2] == 70))
 		ft_end_of_line(input);
-	else if (buff[0] == 6)
+	else if (buff[0] == 27 && buff[1] == 91 && buff[2] == 49 && buff[3] == 59 && buff[4] == 53 && buff[5] == 67)
 		ft_jumpword_forward(input);
-	else if (buff[0] == 2)
+	else if (buff[0] == 27 && buff[1] == 91 && buff[2] == 49 && buff[3] == 59 && buff[4] == 53 && buff[5] == 68)
 		ft_jumpword_backward(input);
 }
 
