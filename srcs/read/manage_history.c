@@ -31,7 +31,10 @@ void		ft_history_forth(t_shell *shell)
 			ft_insertchar(shell->history[shell->h_ind], &shell->input);
 		}
 		else
-			tputs(tgetstr("bl", NULL), 1, &ft_intputchar);
+			{
+				ft_clear_screen(&shell->input);
+				tputs(tgetstr("bl", NULL), 1, &ft_intputchar);
+			}
 	}
 }
 
