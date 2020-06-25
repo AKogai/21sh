@@ -17,7 +17,7 @@ static int	ft_launch_cmd_env(t_shell *shell, char **cmd, int i, char **exec_env)
 			ft_puttab(exec_env);
 		return (ret_cmd);
 	}
-	if (ft_is_builtin(new_cmd[0]))
+	if (is_bltin(new_cmd[0]))
 		ret_cmd = ft_launch_builtin(shell, new_cmd);
 	else if ((ret_cmd = ft_get_path(shell, new_cmd[0], &path)) == PATH_OK)
 	{
@@ -42,12 +42,12 @@ static int	ft_create_exec_env(t_shell *shell, char **cmd, char ***exec_env)
 		if (!*exec_env)
 			ft_addtotab(*exec_env, cmd[i++]);
 		else
-			ft_modify_variable(exec_env, cmd[i++]);
+			modify_variable(exec_env, cmd[i++]);
 	}
 	return (i);
 }
 
-int			ft_builtin_env(t_shell *shell, char **cmd)
+int			bltin_env(t_shell *shell, char **cmd)
 {
 	char	**sauv_env;
 	char	**exec_env;
@@ -72,7 +72,7 @@ int			ft_builtin_env(t_shell *shell, char **cmd)
 	return (ret_cmd);
 }
 
-char		*ft_get_env_variable(char **env, char *var)
+char		*get_env(char **env, char *var)
 {
 	char	*temp;
 	char	*stop;

@@ -30,7 +30,7 @@ void	init_raw_term(t_shell *shell)
 	struct termios	term;
 
 	term_type = NULL;
-	if ((term_type = ft_get_env_variable(shell->env, "TERM")))
+	if ((term_type = get_env(shell->env, "TERM")))
 		ret = tgetent(NULL, term_type);
 	else
 		ret = tgetent(NULL, DEFAULT_TERM);

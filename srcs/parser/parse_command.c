@@ -35,7 +35,7 @@ static t_token	*ft_is_heredoc(t_lexer *lexer)
 	return (NULL);
 }
 
-int				ft_parser(t_shell *shell, t_lexer *lexer)
+int				parser(t_shell *shell, t_lexer *lexer)
 {
 	int		list_type;
 	t_token	*dless;
@@ -43,7 +43,7 @@ int				ft_parser(t_shell *shell, t_lexer *lexer)
 
 	if (!lexer || !lexer->nbr_token || shell->sigint)
 		return (EXIT_FAILURE);
-	if ((ret = ft_syntax_error(lexer)))
+	if ((ret = check_syntax(lexer)))
 		return (PARSER_ERROR);
 	if (lexer->last->quoting)
 		ret = ft_read_again_quoting(shell, lexer);

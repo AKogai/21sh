@@ -27,8 +27,8 @@ int			main(void)
 	{
 		shell->sigint = 0;
 		read_line(shell, &line, ft_put_prompt_sigint(shell), DEFAULT);
-		ft_tokenize(&lexer, line);
-		ret_cmd = ft_parser(shell, lexer);
+		tokenizer(&lexer, line);
+		ret_cmd = parser(shell, lexer);
 		if (ret_cmd == PARSER_SUCCESS)
 			ft_run_cmd(shell, lexer);
 		else

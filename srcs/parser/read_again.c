@@ -44,7 +44,7 @@ int			ft_read_again_heredoc(t_shell *shell, t_lexer *lexer, t_token *dless)
 	else
 		ft_strmerge(&hdoc_buff, line);
 	free(line);
-	return (ft_parser(shell, lexer));
+	return (parser(shell, lexer));
 }
 
 int			ft_read_again_list(t_shell *shell, t_lexer *lexer, int list_type)
@@ -71,9 +71,9 @@ int			ft_read_again_list(t_shell *shell, t_lexer *lexer, int list_type)
 		return (PARSER_ERROR);
 	}
 	ft_del_lasttoken(lexer);
-	ft_tokenize(&lexer, line);
+	tokenizer(&lexer, line);
 	free(line);
-	return (ft_parser(shell, lexer));
+	return (parser(shell, lexer));
 }
 
 int			ft_read_again_quoting(t_shell *shell, t_lexer *lexer)
@@ -98,8 +98,8 @@ int			ft_read_again_quoting(t_shell *shell, t_lexer *lexer)
 	line = !ft_strequ(lexer->last->str, "\\\n") ?\
 		ft_strjoin(lexer->last->str, tmp) : ft_strdup(tmp);
 	ft_del_lasttoken(lexer);
-	ft_tokenize(&lexer, line);
+	tokenizer(&lexer, line);
 	free(line);
 	free(tmp);
-	return (ft_parser(shell, lexer));
+	return (parser(shell, lexer));
 }

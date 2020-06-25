@@ -23,7 +23,7 @@ int		ft_isinenv(t_shell *shell, char *var)
 	return (ret);
 }
 
-int		ft_builtin_unsetenv(t_shell *shell, char **cmd)
+int		bltin_unsetenv(t_shell *shell, char **cmd)
 {
 	int suppr;
 	int i;

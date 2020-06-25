@@ -64,7 +64,7 @@ int		ft_launch_simple_cmd(t_shell *shell, t_ast *ast)
 		return (ret_cmd);
 	if ((cmd = ft_cmd_into_tab(ast)))
 	{
-		if (ft_is_builtin(cmd[0]))
+		if (is_bltin(cmd[0]))
 			ret_cmd = ft_launch_builtin(shell, cmd);
 		else if ((ret_cmd = ft_get_path(shell, cmd[0], &path)) == PATH_OK)
 		{

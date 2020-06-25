@@ -20,7 +20,7 @@ static void	ft_modify_env(t_shell *shell, char *key, char *name)
 	char	*var;
 
 	var = ft_strjoin(key, name);
-	ft_modify_variable(&shell->env, var);
+	modify_variable(&shell->env, var);
 	free(var);
 }
 
@@ -50,13 +50,13 @@ static int	ft_move_to_dest(t_shell *shell, char *dest)
 	}
 }
 
-int			ft_builtin_cd(t_shell *shell, char **cmd)
+int			bltin_cd(t_shell *shell, char **cmd)
 {
 	char	*dest;
 
 	if (!cmd[1])
 	{
-		if (!(dest = ft_get_env_variable(shell->env, "HOME")))
+		if (!(dest = get_env(shell->env, "HOME")))
 		{
 			ft_put_cmd_error(CMD_CD, STR_HOME);
 			return (EXIT_FAILURE);
@@ -64,7 +64,7 @@ int			ft_builtin_cd(t_shell *shell, char **cmd)
 	}
 	else if (ft_strequ(cmd[1], "-"))
 	{
-		if (!(dest = ft_get_env_variable(shell->env, "OLDPWD")))
+		if (!(dest = get_env(shell->env, "OLDPWD")))
 		{
 			ft_put_cmd_error(CMD_CD, STR_OLDPWD);
 			return (EXIT_FAILURE);

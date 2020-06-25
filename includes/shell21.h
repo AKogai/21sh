@@ -7,10 +7,8 @@
 # include "libft.h"
 # include "lexer.h"
 
-# define BBLUE          "\033[1;34m"
-# define BMAGENTA       "\033[1;35m"
+
 # define BGREEN         "\033[1;32m"
-# define BRED           "\033[1;31m"
 # define BWHITE         "\033[1;37m"
 # define BLUE           "\033[0;34m"
 
@@ -48,7 +46,6 @@ void			exit_shell(t_shell *shell, char *str, int ret);
 # include <sys/ioctl.h>
 # include <sys/types.h>
 # include <pwd.h>
-//# include <uuid/uuid.h>
 
 # define INPUTSIZE		4096
 # define BUFFSIZE		6
@@ -168,12 +165,8 @@ typedef struct	s_ast
 	t_token			*token;
 }				t_ast;
 
-int				ft_parser(t_shell *shell, t_lexer *lexer);
-
-/*
-** SYNTAX ERROR
-*/
-int				ft_syntax_error(t_lexer *lexer);
+int				parser(t_shell *shell, t_lexer *lexer);
+int				check_syntax(t_lexer *lexer);
 
 /*
 ** INCOMPLETE INPUT
@@ -217,19 +210,19 @@ void			ft_del_ast(t_ast **ast);
 # define STR_OLDPWD		"OLDPWD not set"
 # define STR_HIST_EMPTY	"21sh: history is empty"
 
-int		ft_is_builtin(char *cmd);
-int		ft_builtin_echo(char **cmd);
-int		ft_builtin_env(t_shell *shell, char **cmd);
-int		ft_builtin_setenv(t_shell *shell, char **cmd);
-int		ft_builtin_unsetenv(t_shell *shell, char **cmd);
-int		ft_builtin_cd(t_shell *shell, char **cmd);
-void	ft_builtin_exit(t_shell *shell, char **cmd);
-int		ft_builtin_history(t_shell *shell, char **cmd);
+int		is_bltin(char *cmd);
+int		bltin_echo(char **cmd);
+int		bltin_env(t_shell *shell, char **cmd);
+int		bltin_setenv(t_shell *shell, char **cmd);
+int		bltin_unsetenv(t_shell *shell, char **cmd);
+int		bltin_cd(t_shell *shell, char **cmd);
+void	bltin_exit(t_shell *shell, char **cmd);
+int		bltin_history(t_shell *shell, char **cmd);
 /*
 ** ENV
 */
-char	*ft_get_env_variable(char **env, char *var);
-void	ft_modify_variable(char ***env, char *new_var);
+char	*get_env(char **env, char *var);
+void	modify_variable(char ***env, char *new_var);
 
 
 /*

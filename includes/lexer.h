@@ -23,7 +23,6 @@ typedef struct	s_lexer
 	t_token	*first;
 	t_token	*last;
 	int		nbr_token;
-	int		flags;
 }				t_lexer;
 
 enum			e_tokentype
@@ -55,7 +54,7 @@ enum			e_operatorlst
 	GREAT
 };
 
-void			ft_tokenize(t_lexer **lexer, char *line);
+void			tokenizer(t_lexer **lexer, char *line);
 
 /*
 ** GET WORD
