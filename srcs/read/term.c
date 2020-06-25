@@ -1,7 +1,7 @@
 
 #include "shell21.h"
 
-void	ft_init_input_struct(t_input *input, int len_prompt)
+void	init_input_struct(t_input *input, int len_prompt)
 {
 	struct winsize	win;
 
@@ -23,7 +23,7 @@ void	ft_init_input_struct(t_input *input, int len_prompt)
 	input->origin_prompt = len_prompt;
 }
 
-void	ft_raw_term(t_shell *shell)
+void	init_raw_term(t_shell *shell)
 {
 	const char		*term_type;
 	int				ret;
@@ -50,7 +50,7 @@ void	ft_raw_term(t_shell *shell)
 		ft_exit("tcsetattr: Unable to set raw mode", 1);
 }
 
-void	ft_canonic_term(void)
+void	init_canonic_term(void)
 {
 	struct termios	term;
 

@@ -36,7 +36,7 @@ typedef struct	s_shell
 	int			sigint;
 }				t_shell;
 
-t_shell			*init(char **env);
+t_shell			*init(void);
 void			signal_handler(t_shell *shell, int exec);
 void			exit_shell(t_shell *shell, char *str, int ret);
 
@@ -48,7 +48,7 @@ void			exit_shell(t_shell *shell, char *str, int ret);
 # include <sys/ioctl.h>
 # include <sys/types.h>
 # include <pwd.h>
-# include <uuid/uuid.h>
+//# include <uuid/uuid.h>
 
 # define INPUTSIZE		4096
 # define BUFFSIZE		6
@@ -60,43 +60,42 @@ enum			e_mode
 	DEFAULT,
 	QUOTES,
 	LIST = 1,
-	HEREDOC,
-	HISTORY
+	HEREDOC
 };
 
 /*
 ** READLINE
 */
-void			ft_read_line(t_shell *shell, char **line, int len_prompt, int mode);
+void			read_line(t_shell *shell, char **line, int len_prompt, int mode);
 /*
 ** TERM
-** ft_interpret mode :
+** interpret mode :
 ** 0 == regular prompt
 ** 1 == parser prompt waiting for the end of input list or quote.
 ** 2 == heredoc
 ** 3 == historic search
 */
-void			ft_init_input_struct(t_input *input, int len_prompt);
-void			ft_raw_term(t_shell *shell);
-void			ft_canonic_term(void);
-int				ft_interpret(char *buff, t_shell *shell, int mode);
-int				ft_intputchar(int c);
+void			init_input_struct(t_input *input, int len_prompt);
+void			init_raw_term(t_shell *shell);
+void			init_canonic_term(void);
+int				interpret(char *buff, t_shell *shell, int mode);
+
 
 /*
-** CURSOR MOVES
+** Cursor movement
 */
-void			ft_move_left(t_input *input);
-void			ft_move_right(t_input *input);
-void			ft_move_up(t_input *input);
-void			ft_move_down(t_input *input);
+void			move_left(t_input *input);
+void			move_right(t_input *input);
+void			move_up(t_input *input);
+void			move_down(t_input *input);
 
 /*
-** MOVE COMMANDS
+** Shift the cursor
 */
-void			ft_beginning_of_line(t_input *input);
-void			ft_end_of_line(t_input *input);
-void			ft_jumpword_forward(t_input *input);
-void			ft_jumpword_backward(t_input *input);
+void			shift_to_beginning(t_input *input);
+void			shift_to_end(t_input *input);
+void			shift_to_next_word(t_input *input);
+void			shift_to_prev_word(t_input *input);
 
 /*
 ** MOVES NOT LINKED TO USER COMMANDS
@@ -112,7 +111,7 @@ void			ft_goto_lastpos(t_input *input);
 int				ft_insertchar(char *buff, t_input *input);
 void			ft_back_deletechar(t_input *input);
 void			ft_deletechar(t_input *input);
-void			ft_accept_line(t_input *input);
+void			accept_line(t_input *input);
 
 /*
 ** COPY N CUT
@@ -195,7 +194,6 @@ t_ast			*ft_create_ast(t_token **token);
 t_ast			*ft_create_node(t_ast *left, t_ast *node, t_ast *right);
 t_ast			*ft_create_leaf(t_token **token, int delim);
 int				ft_check_next_operator(t_token *token, int op);
-void			ft_print_ast(t_ast *ast, char *side, int lvl);
 void			ft_del_ast(t_ast **ast);
 
 

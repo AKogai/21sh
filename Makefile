@@ -18,7 +18,6 @@ SRCS = 	$(addprefix $(SRCS_PATH)/, main.c \
 		read/manage_history.c \
 		read/interpret.c \
 		lexer/list_lexer.c \
-		lexer/print_lexer.c \
 		lexer/tokenize.c \
 		lexer/get_word.c \
 		lexer/get_operator.c \
@@ -30,7 +29,6 @@ SRCS = 	$(addprefix $(SRCS_PATH)/, main.c \
 		parser/remove_quotes.c \
 		parser/create_ast.c \
 		parser/ast_elem.c \
-		parser/print_ast.c \
 		exec/execute.c \
 		exec/simple_cmd.c \
 		exec/expansion.c \

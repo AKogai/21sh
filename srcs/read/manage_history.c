@@ -60,7 +60,7 @@ static void	ft_close_termcaps(t_shell *shell)
 	shell->return_value = EXIT_SUCCESS;
 	free(shell->input.line);
 	free(shell->input.tmp);
-	ft_canonic_term();
+	init_canonic_term();
 	write(1, "\n", 1);
 }
 
@@ -72,8 +72,8 @@ void		ft_history_search(t_shell *shell)
 
 	ft_clear_screen(&shell->input);
 	ft_close_termcaps(shell);
-	ft_read_line(shell, &line, write(1, HISTO_PROMPT, ft_strlen(HISTO_PROMPT)), 3);
-	ft_raw_term(shell);
+	read_line(shell, &line, write(1, HISTO_PROMPT, ft_strlen(HISTO_PROMPT)), 3);
+	init_raw_term(shell);
 	tmp = NULL;
 	if (!shell->sigint)
 	{
@@ -85,7 +85,7 @@ void		ft_history_search(t_shell *shell)
 		}
 		free(little);
 	}
-	ft_init_input_struct(&shell->input, ft_display_prompt());
+	init_input_struct(&shell->input, ft_display_prompt());
 	if (tmp)
 		ft_insertchar(tmp, &shell->input);
 	free(tmp);

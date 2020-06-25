@@ -83,7 +83,5 @@ void			ft_addtoken(t_lexer *lexer, t_token *token);
 void			ft_del_lasttoken(t_lexer *lexer);
 void			ft_dellexer(t_lexer **lexer);
 void			ft_deltokens(t_token **token);
-void			ft_printlexer(t_token *token, int nbr_token);
-void			ft_reverseprint(t_lexer *lexer);
 
 #endif

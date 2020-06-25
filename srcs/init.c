@@ -49,9 +49,10 @@ static void	ft_update_pwd(char ***env)
 	}
 }
 
-t_shell		*init(char **environ)
+t_shell		*init(void)
 {
-	t_shell	*shell;
+	extern char	**environ;
+	t_shell		*shell;
 
 	shell = ft_memalloc(sizeof(t_shell));
 	shell->env = ft_tabdup(environ);

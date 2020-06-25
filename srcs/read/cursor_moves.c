@@ -7,7 +7,7 @@
 ** Bonus = up (key: page up) and down (key: page down)
 */
 
-void	ft_move_right(t_input *input)
+void	move_right(t_input *input)
 {
 	if ((input->y * (input->width + 1) + input->x)\
 			< (input->prompt + input->len))
@@ -29,7 +29,7 @@ void	ft_move_right(t_input *input)
 		tputs(tgetstr("bl", NULL), 1, &ft_intputchar);
 }
 
-void	ft_move_left(t_input *input)
+void	move_left(t_input *input)
 {
 	int i;
 
@@ -52,7 +52,7 @@ void	ft_move_left(t_input *input)
 		tputs(tgetstr("bl", NULL), 1, &ft_intputchar);
 }
 
-void	ft_move_up(t_input *input)
+void	move_up(t_input *input)
 {
 	if (input->y > 1 || (input->y == 1 && input->x >= input->prompt))
 	{
@@ -60,12 +60,12 @@ void	ft_move_up(t_input *input)
 		input->y--;
 	}
 	else if (input->y == 1 && input->x < input->prompt)
-		ft_beginning_of_line(input);
+		shift_to_beginning(input);
 	else
 		tputs(tgetstr("bl", NULL), 1, &ft_intputchar);
 }
 
-void	ft_move_down(t_input *input)
+void	move_down(t_input *input)
 {
 	if (((input->y + 1) * (input->width + 1) + input->x)\
 			< (input->prompt + input->len))
@@ -75,7 +75,7 @@ void	ft_move_down(t_input *input)
 	}
 	else if (((input->y + 1) * (input->width + 1))\
 			<= (input->prompt + input->len))
-		ft_end_of_line(input);
+		shift_to_end(input);
 	else
 		tputs(tgetstr("bl", NULL), 1, &ft_intputchar);
 }
