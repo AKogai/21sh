@@ -3,6 +3,7 @@
 # define SHELL21_H
 
 # include <signal.h>
+# include <limits.h>
 
 # include "libft.h"
 # include "lexer.h"
@@ -36,6 +37,7 @@ typedef struct	s_shell
 
 t_shell			*init(void);
 void			signal_handler(t_shell *shell, int exec);
+void			*sigwinch_handler(t_shell *shell);
 void			exit_shell(t_shell *shell, char *str, int ret);
 
 /*
@@ -229,7 +231,7 @@ void	modify_variable(char ***env, char *new_var);
 ** Execute
  */
 # include <sys/stat.h>
-# include <fcntl.h>
+//# include <fcntl.h>
 # include <errno.h>
 
 # define PATH_OK			0
