@@ -78,9 +78,9 @@
 	<key>keyMapBoundKeys</key>
 	<dict>
 		<key>$F702</key>
-		<string>[1;2D</string>
+		<string>n</string>
 		<key>$F703</key>
-		<string>[1;2C</string>
+		<string>m</string>
 		<key>$F708</key>
 		<string>[25~</string>
 		<key>$F709</key>
