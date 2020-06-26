@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   prompt.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cchieko <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/21 17:07:08 by cchieko           #+#    #+#             */
+/*   Updated: 2020/06/21 17:11:25 by cchieko          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "shell21.h"
 
-static char	*ft_get_user(void)
+static char		*ft_get_user(void)
 {
 	struct passwd *ret_pwd;
 
@@ -10,12 +21,12 @@ static char	*ft_get_user(void)
 	return (ft_strdup(ret_pwd->pw_name));
 }
 
-static void	ft_prompt_ret_cmd(void)
+static void		ft_prompt_ret_cmd(void)
 {
 	ft_putstr(BGREEN" $> "RESET);
 }
 
-int			ft_put_prompt_sigint(t_shell *shell)
+int				ft_put_prompt_sigint(t_shell *shell)
 {
 	int len;
 
@@ -27,14 +38,13 @@ int			ft_put_prompt_sigint(t_shell *shell)
 	return (len);
 }
 
-int			ft_display_prompt(void)
+int				ft_display_prompt(void)
 {
 	char	*user;
 	char	*cwd;
 	int		len;
 
 	len = 6;
-	ft_putstr(BWHITE);
 	if ((user = ft_get_user()))
 	{
 		ft_putstr(user);

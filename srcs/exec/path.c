@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cchieko <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/21 17:07:08 by cchieko           #+#    #+#             */
+/*   Updated: 2020/06/21 17:11:25 by cchieko          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "shell21.h"
 
@@ -53,7 +64,8 @@ static int		ft_test_path(char *cmd, char **cmd_path, char **test)
 	return (ret);
 }
 
-static int		ft_search_through_path(t_shell *shell, char *cmd, char **cmd_path)
+static int		ft_search_through_path(t_shell *shell, char *cmd,
+	char **cmd_path)
 {
 	char	*tmp;
 	char	**path;

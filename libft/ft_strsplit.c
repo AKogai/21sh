@@ -35,9 +35,9 @@ static int	count_words(char const *s, char c)
 	return (word);
 }
 
-int 		ft_wordlen(char const *str, char const c)
+int			ft_wordlen(char const *str, char const c)
 {
-	int 	i;
+	int	i;
 
 	i = 0;
 	while (str[i] != c && str[i])
@@ -63,7 +63,7 @@ char		**ft_strsplit(char const *s, char c)
 		word_len = ft_wordlen(s, c);
 		if (!(arr[i] = ft_strsub(s, 0, word_len)))
 			return (NULL);
-		s +=word_len;
+		s += word_len;
 		i++;
 	}
 	arr[i] = NULL;

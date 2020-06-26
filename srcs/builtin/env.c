@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cchieko <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/21 17:07:08 by cchieko           #+#    #+#             */
+/*   Updated: 2020/06/21 17:11:25 by cchieko          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "shell21.h"
 
-static int	ft_launch_cmd_env(t_shell *shell, char **cmd, int i, char **exec_env)
+static int	ft_launch_cmd_env(t_shell *shell, char **cmd, int i,
+	char **exec_env)
 {
 	char	**new_cmd;
 	char	*path;
@@ -56,7 +68,7 @@ int			bltin_env(t_shell *shell, char **cmd)
 
 	ret_cmd = EXIT_SUCCESS;
 	if (!cmd[1] || ft_strequ(cmd[1], CMD_ENV))
-		shell->env ? ft_puttab(shell->env): 0;
+		shell->env ? ft_puttab(shell->env) : 0;
 	else
 	{
 		sauv_env = ft_tabdup(shell->env);
