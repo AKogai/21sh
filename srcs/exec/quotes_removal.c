@@ -1,7 +1,7 @@
 
 #include "shell21.h"
 
-void	ft_remove_quoting(t_token *token)
+void	ft_remove_quoting(t_shell *shell, t_token *token)
 {
 	t_token *tmp;
 	char	*new;
@@ -17,7 +17,7 @@ void	ft_remove_quoting(t_token *token)
 		}
 		if (tmp->operator_type == DLESS)
 		{
-			ft_heredoc_expand_remove_quoting(tmp);
+			ft_heredoc_expand_remove_quoting(shell, tmp);
 		}
 		tmp = tmp->next;
 	}

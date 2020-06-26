@@ -1,0 +1,11 @@
+author
+cmake-build-debug/
+.idea/
+libft/.idea
+.DS_Store
+21sh
+libft/libft.a
+21sh.dSYM/
+objects/
+*.o
+*.gch

@@ -12,21 +12,18 @@ static char	*ft_get_user(void)
 
 static void	ft_prompt_ret_cmd(void)
 {
-	if (g_shell->return_value == EXIT_SUCCESS)
-		ft_putstr(BGREEN" $> "RESET);
-	else
-		ft_putstr(BRED" $> "RESET);
+	ft_putstr(BGREEN" $> "RESET);
 }
 
-int			ft_put_prompt_sigint(void)
+int			ft_put_prompt_sigint(t_shell *shell)
 {
 	int len;
 
-	ft_raw_term();
+	init_raw_term(shell);
 	tputs(tgetstr("cr", NULL), 1, &ft_intputchar);
 	tputs(tgetstr("ce", NULL), 1, &ft_intputchar);
 	len = ft_display_prompt();
-	ft_canonic_term();
+	init_canonic_term();
 	return (len);
 }
 

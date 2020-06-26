@@ -35,21 +35,21 @@ static t_token	*ft_is_heredoc(t_lexer *lexer)
 	return (NULL);
 }
 
-int				ft_parser(t_lexer *lexer)
+int				parser(t_shell *shell, t_lexer *lexer)
 {
 	int		list_type;
 	t_token	*dless;
 	int		ret;
 
-	if (!lexer || !lexer->nbr_token || g_shell->sigint)
+	if (!lexer || !lexer->nbr_token || shell->sigint)
 		return (EXIT_FAILURE);
-	if ((ret = ft_syntax_error(lexer)))
+	if ((ret = check_syntax(lexer)))
 		return (PARSER_ERROR);
 	if (lexer->last->quoting)
-		ret = ft_read_again_quoting(lexer);
+		ret = ft_read_again_quoting(shell, lexer);
 	else if ((dless = ft_is_heredoc(lexer)))
-		ret = ft_read_again_heredoc(lexer, dless);
+		ret = ft_read_again_heredoc(shell, lexer, dless);
 	else if ((list_type = ft_incomplete_list(lexer)))
-		ret = ft_read_again_list(lexer, list_type);
+		ret = ft_read_again_list(shell, lexer, list_type);
 	return (ret);
 }

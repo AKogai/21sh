@@ -38,7 +38,7 @@ static	int		ft_check_operator(t_token *token)
 	return (0);
 }
 
-int				ft_syntax_error(t_lexer *lexer)
+int				check_syntax(t_lexer *lexer)
 {
 	t_token *tmp;
 

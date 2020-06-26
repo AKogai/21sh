@@ -10,7 +10,7 @@ int		ft_get_newline(t_lexer *lexer)
 	return (1);
 }
 
-void	ft_tokenize(t_lexer **lexer, char *line)
+void	tokenizer(t_lexer **lexer, char *line)
 {
 	if (!line || !*line)
 		return ;
