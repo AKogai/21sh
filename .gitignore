@@ -1,7 +1,7 @@
 author
 cmake-build-debug/
 *.idea/
-
+.vscode
 .DS_Store
 21sh
 21sh.dSYM/
