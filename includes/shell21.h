@@ -14,6 +14,7 @@
 # define SHELL21_H
 
 # include <signal.h>
+# include <limits.h>
 # include "libft.h"
 # include "lexer.h"
 # include <term.h>
@@ -56,6 +57,7 @@ typedef struct	s_shell
 
 t_shell			*init(void);
 void			signal_handler(t_shell *shell, int exec);
+void			*sigwinch_handler(t_shell *shell);
 void			exit_shell(t_shell *shell, char *str, int ret);
 
 enum			e_mode
@@ -229,10 +231,6 @@ int				bltin_history(t_shell *shell, char **cmd);
 */
 char			*get_env(char **env, char *var);
 void			modify_variable(char ***env, char *new_var);
-
-/*
-** Execute
-*/
 
 # define PATH_OK			0
 # define REDIR_OK			0

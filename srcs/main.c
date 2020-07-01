@@ -34,7 +34,7 @@ int			main(void)
 	int		ret_cmd;
 
 	shell = init();
-	signal_handler(shell, 0);
+//	signal_handler(shell, 0);
 	while (1)
 	{
 		shell->sigint = 0;

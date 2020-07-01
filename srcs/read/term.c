@@ -17,8 +17,8 @@ void	init_input_struct(t_input *input, int len_prompt)
 	struct winsize	win;
 
 	ft_bzero(input, sizeof(t_input));
-	input->line = ft_memalloc(INPUTSIZE);
-	input->tmp = ft_memalloc(INPUTSIZE);
+	input->line = (char *)ft_memalloc(INPUTSIZE);
+	input->tmp = (char *)ft_memalloc(INPUTSIZE);
 	if ((ioctl(0, TIOCGWINSZ, &win)) == -1)
 		ft_exit("ioctl: Unable to get winsize struct", 1);
 	input->width = win.ws_col - 1;
