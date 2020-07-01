@@ -8,7 +8,7 @@ static void	ft_increase_shlvl(char ***env)
 	char	*newlvl;
 	int		lvl;
 
-	if ((shlvl = ft_get_env_variable(*env, "SHLVL")))
+	if ((shlvl = get_env(*env, "SHLVL")))
 	{
 		lvl = ft_atoi(shlvl) + 1;
 		newlvl = ft_itoa(lvl);
@@ -16,7 +16,7 @@ static void	ft_increase_shlvl(char ***env)
 		shlvl = ft_strjoin("SHLVL=", newlvl);
 		free(temp);
 		free(newlvl);
-		ft_modify_variable(env, shlvl);
+		modify_variable(env, shlvl);
 		free(shlvl);
 	}
 	else
@@ -31,12 +31,12 @@ static void	ft_update_pwd(char ***env)
 
 	if (!(cwd = getcwd(NULL, 0)))
 		return ;
-	if ((pwd = ft_get_env_variable(*env, "PWD")))
+	if ((pwd = get_env(*env, "PWD")))
 	{
 		temp = cwd;
 		cwd = ft_strjoin("PWD=", cwd);
 		free(temp);
-		ft_modify_variable(env, cwd);
+		modify_variable(env, cwd);
 		free(pwd);
 		free(cwd);
 	}
@@ -49,9 +49,10 @@ static void	ft_update_pwd(char ***env)
 	}
 }
 
-t_shell		*init(char **environ)
+t_shell		*init(void)
 {
-	t_shell	*shell;
+	extern char	**environ;
+	t_shell		*shell;
 
 	shell = ft_memalloc(sizeof(t_shell));
 	shell->env = ft_tabdup(environ);

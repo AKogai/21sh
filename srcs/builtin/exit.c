@@ -1,7 +1,7 @@
 
 #include "shell21.h"
 
-void	ft_builtin_exit(t_shell *shell, char **cmd)
+void	bltin_exit(t_shell *shell, char **cmd)
 {
 	if (!cmd[1])
 		exit_shell(shell, CMD_EXIT, shell->return_value);

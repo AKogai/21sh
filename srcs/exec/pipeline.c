@@ -12,7 +12,7 @@ static int	ft_launch_one_side(t_shell *shell, t_ast *side)
 		return (status);
 	if ((cmd = ft_cmd_into_tab(side)))
 	{
-		if (ft_is_builtin(cmd[0]))
+		if (is_bltin(cmd[0]))
 			status = ft_launch_builtin(shell, cmd);
 		else if ((status = ft_get_path(shell, cmd[0], &path)) == PATH_OK)
 		{

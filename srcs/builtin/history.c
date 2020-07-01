@@ -1,7 +1,7 @@
 
 #include "shell21.h"
 
-int		ft_builtin_history(t_shell *shell, char **cmd)
+int		bltin_history(t_shell *shell, char **cmd)
 {
 	int len;
 	int	i;

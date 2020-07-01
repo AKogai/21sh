@@ -1,7 +1,7 @@
 
 #include "shell21.h"
 
-int		ft_is_builtin(char *cmd)
+int		is_bltin(char *cmd)
 {
 	if (ft_strequ(cmd, CMD_ECHO) || ft_strequ(cmd, CMD_EXIT)\
 			|| ft_strequ(cmd, CMD_ENV) || ft_strequ(cmd, CMD_SETENV)\
@@ -14,18 +14,18 @@ int		ft_is_builtin(char *cmd)
 int		ft_launch_builtin(t_shell *shell, char **cmd)
 {
 	if (ft_strequ(*cmd, CMD_ECHO))
-		return (ft_builtin_echo(cmd));
+		return (bltin_echo(cmd));
 	if (ft_strequ(*cmd, CMD_CD))
-		return (ft_builtin_cd(shell, cmd));
+		return (bltin_cd(shell, cmd));
 	if (ft_strequ(*cmd, CMD_ENV))
-		return (ft_builtin_env(shell, cmd));
+		return (bltin_env(shell, cmd));
 	if (ft_strequ(*cmd, CMD_SETENV))
-		return (ft_builtin_setenv(shell, cmd));
+		return (bltin_setenv(shell, cmd));
 	if (ft_strequ(*cmd, CMD_UNSETENV))
-		return (ft_builtin_unsetenv(shell, cmd));
+		return (bltin_unsetenv(shell, cmd));
 	if (ft_strequ(*cmd, CMD_HIST))
-		return (ft_builtin_history(shell, cmd));
+		return (bltin_history(shell, cmd));
 	if (ft_strequ(*cmd, CMD_EXIT))
-		ft_builtin_exit(shell, cmd);
+		bltin_exit(shell, cmd);
 	return (0);
 }

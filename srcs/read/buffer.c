@@ -43,7 +43,7 @@ int		ft_insertchar(char *buff, t_input *input)
 		input->len += buff_size;
 		ft_goto_lastpos(input);
 		while (buff_size-- > 0)
-			ft_move_right(input);
+			move_right(input);
 		free(end);
 	}
 	else
@@ -73,7 +73,7 @@ void	ft_back_deletechar(t_input *input)
 		ft_putstr(input->line);
 		input->len--;
 		ft_goto_lastpos(input);
-		ft_move_left(input);
+		move_left(input);
 		free(begin);
 		free(end);
 	}

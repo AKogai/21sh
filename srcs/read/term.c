@@ -1,13 +1,13 @@
 
 #include "shell21.h"
 
-void	ft_init_input_struct(t_input *input, int len_prompt)
+void	init_input_struct(t_input *input, int len_prompt)
 {
 	struct winsize	win;
 
 	ft_bzero(input, sizeof(t_input));
-	input->line = ft_memalloc(INPUTSIZE);
-	input->tmp = ft_memalloc(INPUTSIZE);
+	input->line = (char *)ft_memalloc(INPUTSIZE);
+	input->tmp = (char *)ft_memalloc(INPUTSIZE);
 	if ((ioctl(0, TIOCGWINSZ, &win)) == -1)
 		ft_exit("ioctl: Unable to get winsize struct", 1);
 	input->width = win.ws_col - 1;
@@ -23,14 +23,14 @@ void	ft_init_input_struct(t_input *input, int len_prompt)
 	input->origin_prompt = len_prompt;
 }
 
-void	ft_raw_term(t_shell *shell)
+void	init_raw_term(t_shell *shell)
 {
 	const char		*term_type;
 	int				ret;
 	struct termios	term;
 
 	term_type = NULL;
-	if ((term_type = ft_get_env_variable(shell->env, "TERM")))
+	if ((term_type = get_env(shell->env, "TERM")))
 		ret = tgetent(NULL, term_type);
 	else
 		ret = tgetent(NULL, DEFAULT_TERM);
@@ -50,7 +50,7 @@ void	ft_raw_term(t_shell *shell)
 		ft_exit("tcsetattr: Unable to set raw mode", 1);
 }
 
-void	ft_canonic_term(void)
+void	init_canonic_term(void)
 {
 	struct termios	term;
 

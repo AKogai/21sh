@@ -1,7 +1,7 @@
 
 #include "shell21.h"
 
-int		ft_builtin_echo(char **cmd)
+int		bltin_echo(char **cmd)
 {
 	int i;
 

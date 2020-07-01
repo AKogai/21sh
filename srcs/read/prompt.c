@@ -19,11 +19,11 @@ int			ft_put_prompt_sigint(t_shell *shell)
 {
 	int len;
 
-	ft_raw_term(shell);
+	init_raw_term(shell);
 	tputs(tgetstr("cr", NULL), 1, &ft_intputchar);
 	tputs(tgetstr("ce", NULL), 1, &ft_intputchar);
 	len = ft_display_prompt();
-	ft_canonic_term();
+	init_canonic_term();
 	return (len);
 }
 

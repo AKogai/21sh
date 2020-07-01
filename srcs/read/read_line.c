@@ -1,7 +1,7 @@
 
 #include "shell21.h"
 
-void		ft_accept_line(t_input *input)
+void		accept_line(t_input *input)
 {
 	ft_clear(input);
 	input->line = ft_strcat(input->line, "\n");
@@ -18,17 +18,17 @@ static void	ft_save_in_history(t_shell *shell, char *line)
 	shell->h_ind = ft_tablen(shell->history);
 }
 
-void		ft_read_line(t_shell *shell, char **line, int len_prompt, int mode)
+void		read_line(t_shell *shell, char **line, int len_prompt, int mode)
 {
 	char	buff[BUFFSIZE];
 
-	ft_raw_term(shell);
-	ft_init_input_struct(&shell->input, len_prompt);
+	init_raw_term(shell);
+	init_input_struct(&shell->input, len_prompt);
 	while (1)
 	{
 		ft_bzero(buff, BUFFSIZE);
 		read(0, buff, BUFFSIZE - 1);
-		if (shell->sigint || ft_interpret(buff, shell, mode))
+		if (shell->sigint || interpret(buff, shell, mode))
 		{
 			*line = ft_strdup(shell->input.line);
 			break ;
@@ -37,7 +37,7 @@ void		ft_read_line(t_shell *shell, char **line, int len_prompt, int mode)
 	if (!shell->sigint && (mode == DEFAULT || mode == QUOTES || mode == LIST)\
 			&& *line && !ft_strequ(*line, "\n") && !ft_strequ(*line, ""))
 		ft_save_in_history(shell, *line);
-	ft_canonic_term();
+	init_canonic_term();
 	free(shell->input.line);
 	free(shell->input.tmp);
 }
