@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipeline.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cchieko <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/21 17:07:08 by cchieko           #+#    #+#             */
+/*   Updated: 2020/06/21 17:11:25 by cchieko          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "shell21.h"
 
@@ -56,7 +67,8 @@ static int	ft_pipe_to_right(t_shell *shell, int fd[2], t_ast *node_right)
 	return (ft_exit_status(status_right));
 }
 
-int			ft_launch_pipeline(t_shell *shell, t_ast *node_left, t_ast *node_right)
+int			ft_launch_pipeline(t_shell *shell, t_ast *node_left,
+	t_ast *node_right)
 {
 	int		fd[2];
 	pid_t	pid_left;

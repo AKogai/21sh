@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   manage_history.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cchieko <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/21 17:07:08 by cchieko           #+#    #+#             */
+/*   Updated: 2020/06/21 17:11:25 by cchieko          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "shell21.h"
 
@@ -31,10 +42,10 @@ void		ft_history_forth(t_shell *shell)
 			ft_insertchar(shell->history[shell->h_ind], &shell->input);
 		}
 		else
-			{
-				ft_clear_screen(&shell->input);
-				tputs(tgetstr("bl", NULL), 1, &ft_intputchar);
-			}
+		{
+			ft_clear_screen(&shell->input);
+			tputs(tgetstr("bl", NULL), 1, &ft_intputchar);
+		}
 	}
 }
 

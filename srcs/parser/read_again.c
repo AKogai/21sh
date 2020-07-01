@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_again.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cchieko <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/21 17:07:08 by cchieko           #+#    #+#             */
+/*   Updated: 2020/06/21 17:11:25 by cchieko          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "shell21.h"
 
@@ -24,15 +35,16 @@ static void	ft_wrap_heredoc(t_token *dless, char **hdoc_buff, char **delimiter)
 	ft_strdel(delimiter);
 }
 
-int			ft_read_again_heredoc(t_shell *shell, t_lexer *lexer, t_token *dless)
+int			ft_read_again_heredoc(t_shell *shell, t_lexer *lexer,
+	t_token *dless)
 {
 	static char	*hdoc_buff;
 	static char	*delimiter;
 	char		*line;
 
 	ft_create_delimiter(dless, &delimiter);
-	read_line(shell, &line, write(1, HEREDOC_PROMPT, ft_strlen(HEREDOC_PROMPT)), \
-            HEREDOC);
+	read_line(shell, &line, write(1, HEREDOC_PROMPT,
+		ft_strlen(HEREDOC_PROMPT)), HEREDOC);
 	if (!*line)
 	{
 		ft_wrap_heredoc(dless, &hdoc_buff, &delimiter);
@@ -53,16 +65,16 @@ int			ft_read_again_list(t_shell *shell, t_lexer *lexer, int list_type)
 
 	line = NULL;
 	if (list_type == PIPE)
-		read_line(shell, &line, write(1, PIPE_PROMPT, ft_strlen(PIPE_PROMPT)), \
-                LIST);
+		read_line(shell, &line, write(1, PIPE_PROMPT, ft_strlen(PIPE_PROMPT)),
+			LIST);
 	if (list_type == AND_IF)
 	{
-		read_line(shell, &line, write(1, AND_IF_PROMPT, \
-                    ft_strlen(AND_IF_PROMPT)), LIST);
+		read_line(shell, &line, write(1, AND_IF_PROMPT,
+			ft_strlen(AND_IF_PROMPT)), LIST);
 	}
 	if (list_type == OR_IF)
-		read_line(shell, &line, write(1, OR_IF_PROMPT, ft_strlen(OR_IF_PROMPT)), \
-                LIST);
+		read_line(shell, &line, write(1, OR_IF_PROMPT, ft_strlen(OR_IF_PROMPT)),
+			LIST);
 	if (!*line)
 	{
 		free(line);
@@ -81,12 +93,12 @@ int			ft_read_again_quoting(t_shell *shell, t_lexer *lexer)
 	char *line;
 	char *tmp;
 
-	lexer->last->quoting & SQUOTES ? read_line(shell, &tmp, \
-            write(1, SQUOTES_PROMPT, ft_strlen(SQUOTES_PROMPT)), QUOTES) : 0;
-	lexer->last->quoting & DQUOTES ? read_line(shell, &tmp, \
-            write(1, DQUOTES_PROMPT, ft_strlen(DQUOTES_PROMPT)), QUOTES) : 0;
-	lexer->last->quoting & ESCAPE ? read_line(shell, &tmp, \
-            write(1, ESCAPE_PROMPT, ft_strlen(ESCAPE_PROMPT)), QUOTES) : 0;
+	lexer->last->quoting & SQUOTES ? read_line(shell, &tmp,
+		write(1, SQUOTES_PROMPT, ft_strlen(SQUOTES_PROMPT)), QUOTES) : 0;
+	lexer->last->quoting & DQUOTES ? read_line(shell, &tmp,
+		write(1, DQUOTES_PROMPT, ft_strlen(DQUOTES_PROMPT)), QUOTES) : 0;
+	lexer->last->quoting & ESCAPE ? read_line(shell, &tmp,
+		write(1, ESCAPE_PROMPT, ft_strlen(ESCAPE_PROMPT)), QUOTES) : 0;
 	if (!*tmp)
 	{
 		lexer->last->quoting = 0;

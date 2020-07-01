@@ -1,17 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shell21.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cchieko <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/21 17:07:08 by cchieko           #+#    #+#             */
+/*   Updated: 2020/06/21 17:11:25 by cchieko          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef SHELL21_H
 # define SHELL21_H
 
 # include <signal.h>
 # include <limits.h>
-
 # include "libft.h"
 # include "lexer.h"
-
+# include <term.h>
+# include <sys/ioctl.h>
+# include <sys/types.h>
+# include <pwd.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <errno.h>
 
 # define BGREEN         "\033[1;32m"
 # define BWHITE         "\033[1;37m"
 # define BLUE           "\033[0;34m"
+# define INPUTSIZE		4096
+# define BUFFSIZE		6
+# define DEFAULT_TERM	"xterm-256color"
+# define HISTO_PROMPT	"search_history> "
 
 typedef struct	s_input
 {
@@ -40,20 +60,6 @@ void			signal_handler(t_shell *shell, int exec);
 void			*sigwinch_handler(t_shell *shell);
 void			exit_shell(t_shell *shell, char *str, int ret);
 
-/*
-** Line edit part
-*/
-
-# include <term.h>
-# include <sys/ioctl.h>
-# include <sys/types.h>
-# include <pwd.h>
-
-# define INPUTSIZE		4096
-# define BUFFSIZE		6
-# define DEFAULT_TERM	"xterm-256color"
-# define HISTO_PROMPT	"search_history> "
-
 enum			e_mode
 {
 	DEFAULT,
@@ -65,7 +71,8 @@ enum			e_mode
 /*
 ** READLINE
 */
-void			read_line(t_shell *shell, char **line, int len_prompt, int mode);
+void			read_line(t_shell *shell, char **line, int len_prompt,
+	int mode);
 /*
 ** TERM
 ** interpret mode :
@@ -78,7 +85,6 @@ void			init_input_struct(t_input *input, int len_prompt);
 void			init_raw_term(t_shell *shell);
 void			init_canonic_term(void);
 int				interpret(char *buff, t_shell *shell, int mode);
-
 
 /*
 ** Cursor movement
@@ -137,7 +143,6 @@ void			ft_history_back(t_shell *shell);
 void			ft_history_forth(t_shell *shell);
 void			ft_history_search(t_shell *shell);
 
-
 /*
 ** Parsing
 */
@@ -174,8 +179,10 @@ int				check_syntax(t_lexer *lexer);
 ** INCOMPLETE INPUT
 */
 int				ft_read_again_quoting(t_shell *shell, t_lexer *lexer);
-int				ft_read_again_heredoc(t_shell *shell, t_lexer *lexer, t_token *dless);
-int				ft_read_again_list(t_shell *shell, t_lexer *lexer, int list_type);
+int				ft_read_again_heredoc(t_shell *shell, t_lexer *lexer,
+	t_token *dless);
+int				ft_read_again_list(t_shell *shell, t_lexer *lexer,
+	int list_type);
 
 /*
 ** QUOTES for heredoc delimiter
@@ -191,10 +198,9 @@ t_ast			*ft_create_leaf(t_token **token, int delim);
 int				ft_check_next_operator(t_token *token, int op);
 void			ft_del_ast(t_ast **ast);
 
-
 /*
 ** builtins
- */
+*/
 
 # define EXIT_ERROR		255
 
@@ -212,27 +218,19 @@ void			ft_del_ast(t_ast **ast);
 # define STR_OLDPWD		"OLDPWD not set"
 # define STR_HIST_EMPTY	"21sh: history is empty"
 
-int		is_bltin(char *cmd);
-int		bltin_echo(char **cmd);
-int		bltin_env(t_shell *shell, char **cmd);
-int		bltin_setenv(t_shell *shell, char **cmd);
-int		bltin_unsetenv(t_shell *shell, char **cmd);
-int		bltin_cd(t_shell *shell, char **cmd);
-void	bltin_exit(t_shell *shell, char **cmd);
-int		bltin_history(t_shell *shell, char **cmd);
+int				is_bltin(char *cmd);
+int				bltin_echo(char **cmd);
+int				bltin_env(t_shell *shell, char **cmd);
+int				bltin_setenv(t_shell *shell, char **cmd);
+int				bltin_unsetenv(t_shell *shell, char **cmd);
+int				bltin_cd(t_shell *shell, char **cmd);
+void			bltin_exit(t_shell *shell, char **cmd);
+int				bltin_history(t_shell *shell, char **cmd);
 /*
 ** ENV
 */
-char	*get_env(char **env, char *var);
-void	modify_variable(char ***env, char *new_var);
-
-
-/*
-** Execute
- */
-# include <sys/stat.h>
-//# include <fcntl.h>
-# include <errno.h>
+char			*get_env(char **env, char *var);
+void			modify_variable(char ***env, char *new_var);
 
 # define PATH_OK			0
 # define REDIR_OK			0
@@ -262,40 +260,41 @@ void	modify_variable(char ***env, char *new_var);
 /*
 ** EXECUTION
 */
-int		ft_execute(t_shell *shell, t_ast *ast);
-int		ft_launch_builtin(t_shell *shell, char **cmd);
-int		ft_launch_simple_cmd(t_shell *shell, t_ast *ast);
-int		ft_launch_pipeline(t_shell *shell, t_ast *node_left, t_ast *node_right);
-int		ft_init_launch(t_shell *shell, int save[3], t_ast *ast);
-char	**ft_cmd_into_tab(t_ast *ast);
-int		ft_fork(t_shell *shell, char *path, char **cmd);
-int		ft_exit_status(int ret);
+int				ft_execute(t_shell *shell, t_ast *ast);
+int				ft_launch_builtin(t_shell *shell, char **cmd);
+int				ft_launch_simple_cmd(t_shell *shell, t_ast *ast);
+int				ft_launch_pipeline(t_shell *shell, t_ast *node_left,
+	t_ast *node_right);
+int				ft_init_launch(t_shell *shell, int save[3], t_ast *ast);
+char			**ft_cmd_into_tab(t_ast *ast);
+int				ft_fork(t_shell *shell, char *path, char **cmd);
+int				ft_exit_status(int ret);
 
 /*
 ** EXPANSION AND QUOTES
 */
-void	ft_expand(t_shell *shell, t_token *token);
-void	ft_remove_quoting(t_shell *shell, t_token *token);
-void	ft_heredoc_expand_remove_quoting(t_shell *shell, t_token *token);
-int		ft_is_valid_expand(char *str);
-void	ft_var_expansion(t_shell *shell, char **str, char *dollar);
+void			ft_expand(t_shell *shell, t_token *token);
+void			ft_remove_quoting(t_shell *shell, t_token *token);
+void			ft_heredoc_expand_remove_quoting(t_shell *shell,
+	t_token *token);
+int				ft_is_valid_expand(char *str);
+void			ft_var_expansion(t_shell *shell, char **str, char *dollar);
 /*
 ** REDIRECTION
 */
-void	ft_save_std_fd(int save[3]);
-void	ft_restore_std_fd(t_ast *ast, int save[3]);
-int		ft_init_redirection(t_ast *ast);
-int		ft_agreg_files(t_token *redir);
-int		ft_heredoc_pipe(t_token *redir);
-int		ft_make_dup2(char *dest_name, int fd_dest, int fd_src);
-int		ft_open_error(int fd, int err, char *file_name);
-int		ft_open_file(t_token *file);
+void			ft_save_std_fd(int save[3]);
+void			ft_restore_std_fd(t_ast *ast, int save[3]);
+int				ft_init_redirection(t_ast *ast);
+int				ft_agreg_files(t_token *redir);
+int				ft_heredoc_pipe(t_token *redir);
+int				ft_make_dup2(char *dest_name, int fd_dest, int fd_src);
+int				ft_open_error(int fd, int err, char *file_name);
+int				ft_open_file(t_token *file);
 
 /*
 ** PATH
 */
-int		ft_get_path(t_shell *shell, char *cmd, char **path);
-void	ft_put_cmd_error(char *cmd, char *error);
-
+int				ft_get_path(t_shell *shell, char *cmd, char **path);
+void			ft_put_cmd_error(char *cmd, char *error);
 
 #endif
